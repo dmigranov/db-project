@@ -10,7 +10,10 @@ import models.*;
 public class Application extends Controller {
 
     public static void index() {
-        render();
+        Client client = Client.find("order by firstName desc").first();
+
+        render(client);
+
     }
 
 }

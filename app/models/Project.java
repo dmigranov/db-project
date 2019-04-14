@@ -25,6 +25,4 @@ public class Project {
     Trouble trouble;    //или лучше manytomany?
 
     boolean type;
-
-
 }
