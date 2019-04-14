@@ -7,10 +7,6 @@ import java.util.*;
 
 import models.*;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Query;
-
 public class Application extends Controller {
 
     public static void index() {
