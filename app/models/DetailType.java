@@ -1,7 +1,13 @@
 package models;
 
-public class DetailType {
+import play.db.jpa.Model;
+
+import javax.persistence.Entity;
+
+@Entity
+public class DetailType extends Model {
     public String name;
+
 
     public DetailType(String name)
     {

@@ -2,10 +2,12 @@ package models;
 
 import play.db.jpa.Model;
 
+import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import java.util.Date;
 
+@Entity
 public class Project extends Model {
     @ManyToOne
     Client client;

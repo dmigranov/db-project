@@ -17,9 +17,9 @@ public class Application extends Controller {
     }
 
     public static void salary() {
-        List<Employee> employees = Employee.find("order by firstName desc").first();
+        List<Employee> employees = Employee.find("order by salary desc").first();
 
-        render(client);
+        render(employees);
 
     }
 
