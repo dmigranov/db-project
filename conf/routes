@@ -5,7 +5,12 @@
 # Home page
 GET     /                                       Application.index
 
+# Employees' salaries
 GET     /salary                                 Application.salary
+
+# Most popular trouble
+GET     /troubles                               Application.troubles
+
 
 # Ignore favicon requests
 GET     /favicon.ico                            404

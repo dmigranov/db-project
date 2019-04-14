@@ -16,7 +16,6 @@
 <body>
 <h1>Employees' salaries</h1>
 
-#{if employees}
 <div class="employees-salaries">
 
     <table class="table">
@@ -24,24 +23,29 @@
         <tr>
             <th scope="col">First name</th>
             <th scope="col">Last name</th>
+            <th scope="col">Position</th>
             <th scope="col">Salary</th>
+            <th scope="col">Bonus</th>
         </tr>
         </thead>
         <tbody>
+        #{if employees}
+
             #{list items:employees, as:'employee'}
                 <tr>
                     <td>${employee.firstName}</td>
                     <td>${employee.lastName}</td>
+                    <td>${employee.position}</td>
                     <td>${employee.salary}</td>
+                    <td>${employee.bonusPercent}</td>
                 </tr>
             #{/list}
+        #{/if}
+
         </tbody>
     </table>
-
-
 </div>
 
-#{/if}
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->

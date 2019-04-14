@@ -8,7 +8,6 @@ import javax.persistence.Entity;
 public class DetailType extends Model {
     public String name;
 
-
     public DetailType(String name)
     {
         this.name = name;
