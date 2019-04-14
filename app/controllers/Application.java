@@ -9,6 +9,7 @@ import models.*;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Query;
 
 public class Application extends Controller {
 
@@ -43,9 +44,14 @@ public class Application extends Controller {
 
     public static void projects(long id) {
         //System.out.println(id);
-        List<Project> projects = Project.find(
-                "engineer.id = ?1 or manager.id = ?1", id
+        /*List<Project> projects = Project.find(
+                "engineer.id = ?1 or manager.id = ?1" , id
+        ).fetch();*/
+
+        List projects = Project.find(
+                "Select p, c.firstName, c.lastName FROM Project p JOIN Client c ON p.client = c  where p.engineer.id = ?1 or p.manager.id = ?1", id
         ).fetch();
+
 
         render(projects);
 
