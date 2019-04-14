@@ -29,7 +29,7 @@ public class Project extends Model {
     @ManyToOne
     Trouble trouble;    //или лучше manytomany?
 
-    boolean type;   //сборка - 0, ремонт - 1
+    boolean type;   //сборка - 0, ремонт - 1. плохо?
 
     public Project(Client client, Employee engineer, Employee manager, long detailCost, int workCost, Date workBegin, Date workEnd, boolean isGuaranteed, Trouble trouble, boolean type)
     {

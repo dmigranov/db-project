@@ -26,7 +26,7 @@ public class Application extends Controller {
     public static void troubles() {
         //List<Employee> employees = Employee.find("order by salary desc").fetch();
         List list = Project.find(
-                "select trouble, count(*) from Project p GROUP BY trouble "
+                "select trouble.id, count(*) from Project p GROUP BY trouble.id "
         ).fetch();
 
         System.out.println(list.size());
