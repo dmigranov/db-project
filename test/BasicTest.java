@@ -13,7 +13,7 @@ public class BasicTest extends UnitTest {
     @Test
     public void createAndRetrieveClient() {
         new Client("Ivan", "Ivanov", "89003431234", "vano@google.com", false).save();
-        //new Client("FSfds", "fdsfds", "89003431234", "vano@google.com", false).save();
+        new Client("FSfds", "fdsfds", "89003431234", "vdsgle.com", false).save();
 
         Client ivan = Client.find("byEmail", "vano@google.com").first();
         assertNotNull(ivan);

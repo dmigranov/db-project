@@ -10,7 +10,7 @@ public class Client extends Model {
     public String firstName;
     public String lastName;
     public String phoneNumber;
-    @Email
+    //@Email
     public String email;
     public boolean isPhysical;
     //id? но в суперкласе Model уже

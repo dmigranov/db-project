@@ -5,9 +5,9 @@ import play.data.validation.Email;
 public class Employee {
     public String firstName;
     public String lastName;
-    public String position;
+    public String position; //todo
     public String phoneNumber;
-    @Email
+//    @Email
     public String email;
     public int salary;
     public double bonusPercent;
