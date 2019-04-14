@@ -14,7 +14,14 @@
 #{extends 'main.html' /}
 
 <body>
-<h1>Employees' projects</h1>
+#{if employee}
+    #{if employee.position.equals("manager")}
+    <h1>Manager ${employee.firstName} ${employee.lastName}'s projects</h1>
+    #{/if}
+    #{else }
+    <h1>Engineer ${employee.firstName} ${employee.lastName}'s projects</h1>
+    #{/else}
+#{/if}
 
 <div class="employees-projects">
 

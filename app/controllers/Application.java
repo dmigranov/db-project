@@ -52,8 +52,10 @@ public class Application extends Controller {
                 "Select p, c.firstName, c.lastName FROM Project p JOIN Client c ON p.client = c  where p.engineer.id = ?1 or p.manager.id = ?1", id
         ).fetch();
 
+        Employee employee = Employee.findById(id);
 
-        render(projects);
+
+        render(projects, employee);
 
     }
 
