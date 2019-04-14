@@ -25,8 +25,13 @@ public class Application extends Controller {
 
     public static void troubles() {
         //List<Employee> employees = Employee.find("order by salary desc").fetch();
+        List list = Project.find(
+                "select trouble, count(*) from Project p GROUP BY trouble "
+        ).fetch();
 
-        render();
+        System.out.println(list.size());
+
+        render(list);
     }
 
 }
