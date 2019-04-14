@@ -7,6 +7,9 @@ import java.util.*;
 
 import models.*;
 
+import javax.persistence.Entity;
+import javax.persistence.Id;
+
 public class Application extends Controller {
 
     public static void index() {
@@ -24,11 +27,12 @@ public class Application extends Controller {
     }
 
     public static void troubles() {
+
         List troubles = Project.find(
-                "select Trouble as t, count(*) as count FROM Project p GROUP BY Trouble "
+                "select t.name, trouble_count FROM Trouble t JOIN (select t.id as id, count(*) as trouble_count FROM Project p JOIN Trouble t ON p.trouble.id = t.id GROUP BY t.id) as tc ON t.id = tc.id"
         ).fetch();
 
-        //System.out.println(troubles.size());
+        //System.out.println(troubles.get(0).count);
 
         render(troubles);
     }
