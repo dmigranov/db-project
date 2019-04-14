@@ -12,7 +12,8 @@ GET     /salary                                 Application.salary
 GET     /troubles                               Application.troubles
 
 #Employees' projects
-GET     /projects/{id}                          Application.projects
+#GET     /projects/{id}                          Application.projects       #через слеш
+GET      /projects                               Application.projects       #через вопросики - как лучше?
 
 
 

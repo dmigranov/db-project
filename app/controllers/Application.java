@@ -27,7 +27,6 @@ public class Application extends Controller {
     }
 
     public static void troubles() {
-
         /*List troubles = Project.find(
                 "select t.name, trouble_count FROM Trouble t JOIN (select t.id as id, count(*) as trouble_count FROM Project p JOIN Trouble t ON p.trouble.id = t.id GROUP BY t.id) as tc ON t.id = tc.id"
         ).fetch();*/
@@ -42,10 +41,13 @@ public class Application extends Controller {
     }
 
 
-    public static void projects(int id) {
+    public static void projects(long id) {
+        //System.out.println(id);
+        List projects = Project.find(
+                "engineer.id = ?1 or manager.id = ?1", id
+        ).fetch();
 
-        System.out.println(id);
-        render();
+        render(projects);
 
     }
 
