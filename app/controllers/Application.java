@@ -38,10 +38,15 @@ public class Application extends Controller {
 
         troubles.get(0);
 
-
-        //System.out.println(troubles.get(0).count);
-
         render(troubles);
+    }
+
+
+    public static void projects(int id) {
+
+        System.out.println(id);
+        render();
+
     }
 
 }

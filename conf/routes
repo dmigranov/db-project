@@ -11,6 +11,10 @@ GET     /salary                                 Application.salary
 # Most popular trouble
 GET     /troubles                               Application.troubles
 
+#Employees' projects
+GET     /projects/{id}                          Application.projects
+
+
 
 # Ignore favicon requests
 GET     /favicon.ico                            404
