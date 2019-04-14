@@ -23,9 +23,9 @@ public class BasicTest extends UnitTest {
         Trouble trouble2 = new Trouble("Another trouble").save();
 
 
-        new Project(ivan, engineer, manager, 10, 30, new Date("13/04/2019"), new Date("14/04/2019"), false, trouble,true).save();
-        new Project(ivan, engineer, manager, 20, 60, new Date("12/04/2019"), new Date("14/04/2019"), false, trouble,true).save();
-        new Project(ivan, engineer, manager, 345, 435, new Date("12/04/2019"), new Date("14/04/2019"), false, trouble2,true).save();
+        new Project(ivan, engineer, manager, 10, 30, new Date(2019, 4, 14), new Date(2019, 4, 15), false, trouble,true).save();
+        new Project(ivan, engineer, manager, 20, 60, new Date(2019, 4, 14), new Date(2019, 4, 15), false, trouble,true).save();
+        new Project(ivan, engineer, manager, 345, 435, new Date(2019, 4, 12), new Date(2019, 4, 13), false, trouble2,true).save();
 
 
         assertNotNull(ivan);

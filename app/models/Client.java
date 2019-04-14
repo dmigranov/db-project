@@ -13,7 +13,7 @@ public class Client extends Model {
     //@Email
     public String email;
     public boolean isPhysical;
-    //id? но в суперкласе Model уже
+    //id? но в суперкласе Model уже. @GeneratedValue
 
     public Client(String firstName, String lastName, String phoneNumber, String email, boolean isPhysical)
     {

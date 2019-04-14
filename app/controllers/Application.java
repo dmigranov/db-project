@@ -43,7 +43,7 @@ public class Application extends Controller {
 
     public static void projects(long id) {
         //System.out.println(id);
-        List projects = Project.find(
+        List<Project> projects = Project.find(
                 "engineer.id = ?1 or manager.id = ?1", id
         ).fetch();
 
