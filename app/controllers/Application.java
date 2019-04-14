@@ -17,7 +17,8 @@ public class Application extends Controller {
     }
 
     public static void salary() {
-        List<Employee> employees = Employee.find("order by salary desc").first();
+        List<Employee> employees = Employee.find("order by salary desc").fetch();
+        System.out.println(employees.size());
 
         render(employees);
 

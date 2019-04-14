@@ -16,6 +16,15 @@ public class Employee extends Model {
     public int salary;
     public double bonusPercent;
 
-
+    public Employee(String firstName, String lastName, String position, String phoneNumber, String email, int salary, double bonusPercent)
+    {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.position = position;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
+        this.salary = salary;
+        this.bonusPercent = bonusPercent;
+    }
 
 }
