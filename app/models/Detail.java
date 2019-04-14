@@ -1,8 +1,10 @@
 package models;
 
+import play.db.jpa.Model;
+
 import javax.persistence.ManyToOne;
 
-public class Detail {
+public class Detail extends Model {
     @ManyToOne
     DetailType type;
 

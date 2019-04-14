@@ -1,6 +1,8 @@
 package models;
 
-public class Trouble {
+import play.db.jpa.Model;
+
+public class Trouble extends Model {
     public String name;
 
     public Trouble(String name)
