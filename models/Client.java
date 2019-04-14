@@ -11,5 +11,15 @@ public class Client extends Model {
     public String phoneNumber;
     public String email;
     public boolean isPhysical;
+    //id? но в суперкласе Model уже
+
+    public Client(String firstName, String lastName, String phoneNumber, String email, boolean isPhysical)
+    {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
+        this.isPhysical = isPhysical;
+    }
 
 }
