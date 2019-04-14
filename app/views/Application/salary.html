@@ -14,35 +14,32 @@
 #{extends 'main.html' /}
 
 <body>
-<h1>Hello, world!</h1>
+<h1>Employees' salaries</h1>
 
 #{if employees}
 <div class="employees-salaries">
-    <h2>Employees' salaries</h2>
-    #{list items:employees, as:'employee'}
-        <div class="post">
-            <h2 class="post-title">
-                <a href="#">${oldPost.title}</a>
-            </h2>
-            <div class="post-metadata">
-                        <span class="post-author">
-                            by ${oldPost.author.fullname}
-                        </span>
-                <span class="post-date">
-                            ${oldPost.postedAt.format('dd MMM yy')}
-                        </span>
-                <div class="post-comments">
-                ${oldPost.comments.size() ?: 'no'}
-                    comment${oldPost.comments.size().pluralize()}
-                    #{if oldPost.comments}
-                        - latest by ${oldPost.comments[-1].author}
-                    #{/if}
-                </div>
-            </div>
-        </div>
-    #{/list}
 
-    </div>
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">First name</th>
+            <th scope="col">Last name</th>
+            <th scope="col">Salary</th>
+        </tr>
+        </thead>
+        <tbody>
+            #{list items:employees, as:'employee'}
+                <tr>
+                    <td>${employee.firstName}</td>
+                    <td>${employee.lastName}</td>
+                    <td>${employee.salary}</td>
+                </tr>
+            #{/list}
+        </tbody>
+    </table>
+
+
+</div>
 
 #{/if}
 
