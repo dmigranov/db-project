@@ -19,7 +19,28 @@
 #{if employees}
 <div class="employees-salaries">
     <h2>Employees' salaries</h2>
-
+    #{list items:employees, as:'employee'}
+        <div class="post">
+            <h2 class="post-title">
+                <a href="#">${oldPost.title}</a>
+            </h2>
+            <div class="post-metadata">
+                        <span class="post-author">
+                            by ${oldPost.author.fullname}
+                        </span>
+                <span class="post-date">
+                            ${oldPost.postedAt.format('dd MMM yy')}
+                        </span>
+                <div class="post-comments">
+                ${oldPost.comments.size() ?: 'no'}
+                    comment${oldPost.comments.size().pluralize()}
+                    #{if oldPost.comments}
+                        - latest by ${oldPost.comments[-1].author}
+                    #{/if}
+                </div>
+            </div>
+        </div>
+    #{/list}
 
     </div>
 
