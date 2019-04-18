@@ -1,5 +1,6 @@
 package models;
 
+import play.data.validation.Min;
 import play.db.jpa.Model;
 
 import javax.persistence.Entity;
@@ -18,8 +19,8 @@ public class Project extends Model {
     @ManyToOne
     Employee manager;
 
-    long detailCost; //нужно ли хранить? можно же посчитаьт
-    int workCost;
+    @Min(0) long detailCost; //нужно ли хранить? можно же посчитаьт
+    @Min(0)int workCost;
 
     Date workBegin;
     Date workEnd;

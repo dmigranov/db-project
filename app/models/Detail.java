@@ -1,5 +1,6 @@
 package models;
 
+import play.data.validation.Min;
 import play.db.jpa.Model;
 
 import javax.persistence.Entity;
@@ -10,12 +11,12 @@ public class Detail extends Model {
     @ManyToOne
     DetailType type;
 
-    int cost;
+    @Min(0)int cost;
 
     String name;
     String description;
 
-    int count;
+    @Min(0)int count;
 
     public Detail(DetailType type, int cost, String name, String description, int count)
     {

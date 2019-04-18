@@ -67,8 +67,7 @@ public class Application extends Controller {
         new Project(ivan, engineer, manager, 20, 60, new Date(2019, 4, 14), new Date(2019, 4, 15), false, trouble,true).save();
         new Project(ivan, engineer, manager, 345, 435, new Date(2019, 4, 12), new Date(2019, 4, 13), false, trouble2,true).save();*/
 
-        Client c = new Client("FSsf", "fdsfsdf", "79003431234", "vano@nsi.com", false);
-
+        /*Client c = new Client("FSsf", "fdsfsdf", "79003431234", "vano@nsi.com", false);
         if(!validation.valid(c).ok)
         {
             //todo: методика я так понимаю такая
@@ -77,14 +76,16 @@ public class Application extends Controller {
         else
         {
             c.save();
-        }
+        }*/
+
+        /*Employee manager = new Employee("Petr", "Petrov", "manager", "89003431234", "vano@google.com", 40000, 0.05).save();
+        System.out.println(validation.valid(manager).ok);
+        Employee engineer = new Employee("Tttt", "Cccc", "fdsfsdf", "89003431234", "vano@google.com", 40000, 0.05).save();
+        System.out.println(validation.valid(engineer).ok);
+        */
     }
 
-    public static void projects(long id) {
-        //System.out.println(id);
-        /*List<Project> projects = Project.find(
-                "engineer.id = ?1 or manager.id = ?1" , id
-        ).fetch();*/
+    public static void projectsOfEmployee(long id) {
 
         List projects = Project.find(
                 "Select p, c.firstName, c.lastName FROM Project p JOIN Client c ON p.client = c  where p.engineer.id = ?1 or p.manager.id = ?1", id
@@ -93,7 +94,16 @@ public class Application extends Controller {
         Employee employee = Employee.findById(id);
 
         render(projects, employee);
+    }
 
+    public static void projects(boolean sortType, boolean desc) {
+
+        List projects = Project.find(
+                "Select p, c.firstName, c.lastName FROM Project p JOIN Client c ON p.client = c  where p.engineer.id = ?1 or p.manager.id = ?1", id
+        ).fetch();
+
+
+        //render(projects, employee);
     }
 
 }

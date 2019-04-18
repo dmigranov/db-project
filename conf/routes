@@ -15,8 +15,8 @@ GET     /troubles                               Application.troubles
 GET     /fill                                   Application.fillDB
 
 #Employees' projects
-#GET     /projects/{id}                          Application.projects       #через слеш
-GET      /projects                               Application.projects       #через вопросики - как лучше?
+#GET     /projects/{id}                         Application.projectsOfEmployee       #через слеш
+GET      /projects                              Application.projectsOfEmployee       #через вопросики - как лучше?
 
 
 # Ignore favicon requests

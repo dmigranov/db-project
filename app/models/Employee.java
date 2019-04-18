@@ -1,9 +1,6 @@
 package models;
 
-import play.data.validation.Email;
-import play.data.validation.Max;
-import play.data.validation.Min;
-import play.data.validation.Phone;
+import play.data.validation.*;
 import play.db.jpa.Model;
 
 import javax.persistence.Entity;
@@ -12,7 +9,7 @@ import javax.persistence.Entity;
 public class Employee extends Model {
     public String firstName;
     public String lastName;
-    public String position; //todo
+    @CheckWith(PositionCheck.class) public String position; //todo
     @Phone public String phoneNumber;
     @Email public String email;
     @Min(0) public int salary;
@@ -29,4 +26,10 @@ public class Employee extends Model {
         this.bonusPercent = bonusPercent;
     }
 
+    private class PositionCheck extends Check {
+        @Override
+        public boolean isSatisfied(Object validatedObject, Object value) {
+            return "manager".equals(value) || "engineer".equals(value);
+        }
+    }
 }
