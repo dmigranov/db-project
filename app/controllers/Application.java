@@ -1,6 +1,7 @@
 package controllers;
 
 import play.*;
+import play.data.validation.Valid;
 import play.db.DB;
 import play.mvc.*;
 
@@ -30,7 +31,7 @@ public class Application extends Controller {
 
     public static void troubles() throws SQLException {
         /*List troubles = Project.find(
-                "select t.name, trouble_count FROM Trouble t JOIN (select t.id as id, count(*) as trouble_count FROM Project p JOIN Trouble t ON p.trouble.id = t.id GROUP BY t.id) as tc ON t.id = tc.id"
+                "select t.name, count(*) as trouble_count FROM Project p JOIN Trouble t ON p.trouble = t GROUP BY t.id, t.name"
         ).fetch();*/
 
         Connection conn = DB.getConnection();
@@ -46,17 +47,13 @@ public class Application extends Controller {
             }
         }
 
-        /*List troubles = Project.find(
-                "select t.name, count(*) as trouble_count FROM Project p JOIN Trouble t ON p.trouble = t GROUP BY t.id, t.name"
-        ).fetch();*/
-
         render(resultList);
     }
 
 
     public void fillDB()
     {
-        Client ivan = new Client("Ivan", "Ivanov", "89003431234", "vano@google.com", false).save();
+        /*Client ivan = new Client("Ivan", "Ivanov", "89003431234", "vano@google.com", false).save();
         new Client("FSfds", "fdsfds", "89003431234", "vdsgle.com", false).save();
 
         Employee manager = new Employee("Petr", "Petrov", "manager", "89003431234", "vano@google.com", 40000, 0.05).save();
@@ -68,7 +65,19 @@ public class Application extends Controller {
 
         new Project(ivan, engineer, manager, 10, 30, new Date(2019, 4, 14), new Date(2019, 4, 15), false, trouble,true).save();
         new Project(ivan, engineer, manager, 20, 60, new Date(2019, 4, 14), new Date(2019, 4, 15), false, trouble,true).save();
-        new Project(ivan, engineer, manager, 345, 435, new Date(2019, 4, 12), new Date(2019, 4, 13), false, trouble2,true).save();
+        new Project(ivan, engineer, manager, 345, 435, new Date(2019, 4, 12), new Date(2019, 4, 13), false, trouble2,true).save();*/
+
+        Client c = new Client("FSsf", "fdsfsdf", "79003431234", "vano@nsi.com", false);
+
+        if(!validation.valid(c).ok)
+        {
+            //todo: методика я так понимаю такая
+            System.out.println("hellloooo");
+        }
+        else
+        {
+            c.save();
+        }
     }
 
     public static void projects(long id) {
