@@ -96,7 +96,7 @@ public class Application extends Controller {
 
     ///выводит список всех проектов и сортирует их
     public static void projects(int sortType, int desc) {   //sortType = 0 - по сумме стимостей, 2 - по типу; desc = 0 - asc, desc = 1 = desc
-        //по идее, стоимость деталей является избыточной, её нужно получать как сумму из DetailOrder'ов!
+        //todo: по идее, стоимость деталей является избыточной, её нужно получать как сумму из DetailOrder'ов!
         List projects = null;
         String order = (desc == 1 ? " desc" : " asc");
         if(sortType == 0) {     //по стоимости
@@ -114,8 +114,10 @@ public class Application extends Controller {
         render(projects);
     }
 
-    public static void popularDetails(boolean sortType, boolean desc) {
+    public static void popularDetails() {
 
+
+        render();
     }
 
 }

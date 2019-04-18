@@ -7,12 +7,10 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-
-    <title>Hello, world!</title>
 </head>
 
 #{extends 'main.html' /}
-
+#{set title:'All projects' /}
 <body>
 <h1>All projects</h1>
 
@@ -50,8 +48,18 @@
                 #{else }
                     <td>No</td>
                 #{/else}
-                <th scope="col">${project[0].troubleDescription}</th>
-                <th scope="col">Type</th>
+                #{if project[0].troubleDescription == null}
+                    <td>-</td>
+                #{/if}
+                #{else }
+                    <th scope="col">${project[0].troubleDescription}</th>
+                #{/else}
+                #{if project[0].type == false}
+                    <td>Build</td>
+                #{/if}
+                #{else }
+                    <td>Repair</td>
+                #{/else}
                 <td>${project[1]} ${project[2]}</td>
 
 
