@@ -114,8 +114,9 @@ public class Application extends Controller {
         render(projects);
     }
 
+    //id - detailType.id НЕ готово!!!!
     public static void popularDetails(long id) {
-        Detail.find("Select Detail d JOIN DetailOrder o ON DetailOrder.detail = d ");
+        Detail.find("Select d FROM Detail d JOIN DetailOrder o ON DetailOrder.detail = d WHERE d.type = ?1 GROUP BY d.id", id).fetch(5);
 
         render();
     }
