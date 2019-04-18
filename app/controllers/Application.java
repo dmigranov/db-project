@@ -114,8 +114,8 @@ public class Application extends Controller {
         render(projects);
     }
 
-    public static void popularDetails() {
-
+    public static void popularDetails(long id) {
+        Detail.find("Select Detail d JOIN DetailOrder o ON DetailOrder.detail = d ");
 
         render();
     }
