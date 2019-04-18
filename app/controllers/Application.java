@@ -49,7 +49,6 @@ public class Application extends Controller {
         render(resultList);
     }
 
-
     public void fillDB() {
         /*Client ivan = new Client("Ivan", "Ivanov", "89003431234", "vano@google.com", false).save();
         new Client("FSfds", "fdsfds", "89003431234", "vdsgle.com", false).save();
@@ -83,6 +82,7 @@ public class Application extends Controller {
         */
     }
 
+    ///выводит список всех проектов, на которых задействован работник
     public static void projectsOfEmployee(long id, Date startDate, Date endDate) {      //todo: дата
 
         List projects = Project.find(
@@ -94,19 +94,21 @@ public class Application extends Controller {
         render(projects, employee);
     }
 
-    public static void projects(boolean sortType, boolean desc) {   //sortType = 0 - по стоимости, 1 - по типу
-
-        /*List projects = Project.find(
-                "Select p, c.firstName, c.lastName FROM Project p JOIN Client c ON p.client = c  where p.engineer.id = ?1 or p.manager.id = ?1", id
-        ).fetch();*/
-
-
-        //render(projects, employee);
+    ///выводит список всех проектов и сортирует их
+    public static void projects(int sortType, int desc) {   //sortType = 0 - по сумме стимостей, 2 - по типу; desc = 0 - asc, desc = 1 = desc
+        //по идее, стоимость деталей является избыточной, её нужно получать как сумму из DetailOrder'ов!
+        List projects = null;
+        if(sortType == 0) {
+            String order = (desc == 1 ? "desc" : "asc");
+            projects = Project.find(
+                    "Select p, (detailCost + workCost) as cost FROM Project p ORDER BY cost" + order
+            ).fetch();
+        }
+        render(projects);
     }
 
-    public static void popularDetails(boolean sortType, boolean desc) {   //sortType = 0 - по стоимости, 1 - по типу
+    public static void popularDetails(boolean sortType, boolean desc) {
 
     }
 
-    ;
 }

@@ -19,6 +19,8 @@ GET     /fill                                   Application.fillDB
 GET      /projects                              Application.projectsOfEmployee       #через вопросики - как лучше?
 
 
+GET      /allprojects                           Application.projects
+
 # Ignore favicon requests
 GET     /favicon.ico                            404
 

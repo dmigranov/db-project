@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <title>Hello, world!</title>
+</head>
+
+#{extends 'main.html' /}
+
+<body>
+#{if employee}
+    #{if employee.position.equals("manager")}
+    <h1>Manager ${employee.firstName} ${employee.lastName}'s projects</h1>
+    #{/if}
+    #{else }
+    <h1>Engineer ${employee.firstName} ${employee.lastName}'s projects</h1>
+    #{/else}
+#{/if}
+
+<div class="employees-projects">
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Detail cost</th>
+            <th scope="col">Work cost</th>
+            <th scope="col">Start of work</th>
+            <th scope="col">End of work</th>
+            <th scope="col">Is guaranteed</th>
+            <th scope="col">Client name</th>
+
+        </tr>
+        </thead>
+        <tbody>
+        #{if projects}
+
+            #{list items:projects, as:'project'}
+            <tr>
+                <td>${project[0].id}</td>
+                <td>${project[0].detailCost}</td>
+                <td>${project[0].workCost}</td>
+                <td>${project[0].workBegin}</td>
+                <td>${project[0].workEnd}</td>
+                #{if project[0].isGuaranteed}
+                    <td>Yes</td>
+                #{/if}
+                #{else }
+                    <td>No</td>
+                #{/else}
+                <td>${project[1]} ${project[2]}</td>
+
+
+            </tr>
+            #{/list}
+        #{/if}
+
+        </tbody>
+    </table>
+</div>
+
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+</html>
