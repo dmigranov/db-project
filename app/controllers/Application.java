@@ -39,11 +39,10 @@ public class Application extends Controller {
         boolean isResultSet = statement.execute("select t.name as t_name, trouble_count FROM Trouble t JOIN (select t.id as id, count(*) as trouble_count FROM Project p JOIN Trouble t ON p.trouble_id = t.id GROUP BY t.id) tc ON t.id = tc.id");
         ResultSet resultSet = null;
         List<Object[]> resultList = new ArrayList<>();
-        if(isResultSet) {
+        if (isResultSet) {
             resultSet = statement.getResultSet();
-            while(resultSet.next())
-            {
-                resultList.add(new Object[] {resultSet.getString("t_name"), resultSet.getInt("trouble_count")});
+            while (resultSet.next()) {
+                resultList.add(new Object[]{resultSet.getString("t_name"), resultSet.getInt("trouble_count")});
             }
         }
 
@@ -51,8 +50,7 @@ public class Application extends Controller {
     }
 
 
-    public void fillDB()
-    {
+    public void fillDB() {
         /*Client ivan = new Client("Ivan", "Ivanov", "89003431234", "vano@google.com", false).save();
         new Client("FSfds", "fdsfds", "89003431234", "vdsgle.com", false).save();
 
@@ -85,7 +83,7 @@ public class Application extends Controller {
         */
     }
 
-    public static void projectsOfEmployee(long id) {
+    public static void projectsOfEmployee(long id, Date startDate, Date endDate) {      //todo: дата
 
         List projects = Project.find(
                 "Select p, c.firstName, c.lastName FROM Project p JOIN Client c ON p.client = c  where p.engineer.id = ?1 or p.manager.id = ?1", id
@@ -96,14 +94,19 @@ public class Application extends Controller {
         render(projects, employee);
     }
 
-    public static void projects(boolean sortType, boolean desc) {
+    public static void projects(boolean sortType, boolean desc) {   //sortType = 0 - по стоимости, 1 - по типу
 
-        List projects = Project.find(
+        /*List projects = Project.find(
                 "Select p, c.firstName, c.lastName FROM Project p JOIN Client c ON p.client = c  where p.engineer.id = ?1 or p.manager.id = ?1", id
-        ).fetch();
+        ).fetch();*/
 
 
         //render(projects, employee);
     }
 
+    public static void popularDetails(boolean sortType, boolean desc) {   //sortType = 0 - по стоимости, 1 - по типу
+
+    }
+
+    ;
 }
