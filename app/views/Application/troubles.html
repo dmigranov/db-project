@@ -26,14 +26,15 @@
         </tr>
         </thead>
         <tbody>
-        #{if troubles}
+        #{if resultList}
 
-            #{list items:troubles, as:'trouble'}
+            #{list items:resultList, as:'trouble'}
             <tr>
                 <td>${trouble[0]}</td>
                 <td>${trouble[1]}</td>
             </tr>
             #{/list}
+
         #{/if}
 
         </tbody>

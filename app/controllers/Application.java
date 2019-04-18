@@ -5,6 +5,9 @@ import play.db.DB;
 import play.mvc.*;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.*;
 
 import models.*;
@@ -25,21 +28,29 @@ public class Application extends Controller {
         render(employees);
     }
 
-    public static void troubles() {
+    public static void troubles() throws SQLException {
         /*List troubles = Project.find(
                 "select t.name, trouble_count FROM Trouble t JOIN (select t.id as id, count(*) as trouble_count FROM Project p JOIN Trouble t ON p.trouble.id = t.id GROUP BY t.id) as tc ON t.id = tc.id"
         ).fetch();*/
 
-        //Connection conn = DB.getConnection();
-        //conn.createStatement().execute("select * from products");
+        Connection conn = DB.getConnection();
+        Statement statement = conn.createStatement();
+        boolean isResultSet = statement.execute("select t.name as t_name, trouble_count FROM Trouble t JOIN (select t.id as id, count(*) as trouble_count FROM Project p JOIN Trouble t ON p.trouble_id = t.id GROUP BY t.id) tc ON t.id = tc.id");
+        ResultSet resultSet = null;
+        List<Object[]> resultList = new ArrayList<>();
+        if(isResultSet) {
+            resultSet = statement.getResultSet();
+            while(resultSet.next())
+            {
+                resultList.add(new Object[] {resultSet.getString("t_name"), resultSet.getInt("trouble_count")});
+            }
+        }
 
-        List troubles = Project.find(
+        /*List troubles = Project.find(
                 "select t.name, count(*) as trouble_count FROM Project p JOIN Trouble t ON p.trouble = t GROUP BY t.id, t.name"
-        ).fetch();
+        ).fetch();*/
 
-
-
-        render(troubles);
+        render(resultList);
     }
 
 
@@ -54,7 +65,6 @@ public class Application extends Controller {
 
         Trouble trouble = new Trouble("Some trouble").save();
         Trouble trouble2 = new Trouble("Another trouble").save();
-
 
         new Project(ivan, engineer, manager, 10, 30, new Date(2019, 4, 14), new Date(2019, 4, 15), false, trouble,true).save();
         new Project(ivan, engineer, manager, 20, 60, new Date(2019, 4, 14), new Date(2019, 4, 15), false, trouble,true).save();
