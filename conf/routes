@@ -11,10 +11,12 @@ GET     /salary                                 Application.salary
 # Most popular trouble
 GET     /troubles                               Application.troubles
 
+# Fill DB
+GET     /fill                                   Application.fillDB
+
 #Employees' projects
 #GET     /projects/{id}                          Application.projects       #через слеш
 GET      /projects                               Application.projects       #через вопросики - как лучше?
-
 
 
 # Ignore favicon requests
