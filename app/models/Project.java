@@ -29,12 +29,12 @@ public class Project extends Model {
 
     @ManyToOne
     Trouble trouble;    //или лучше manytomany?
+    String troubleDescription;
 
     boolean type;   //сборка - 0, ремонт - 1. плохо?
 
-    public Project(Client client, Employee engineer, Employee manager, long detailCost, int workCost, Date workBegin, Date workEnd, boolean isGuaranteed, Trouble trouble, boolean type)
+    public Project(Client client, Employee engineer, Employee manager, long detailCost, int workCost, Date workBegin, Date workEnd, boolean isGuaranteed, Trouble trouble, String troubleDescription, boolean type)
     {
-
         this.client = client;
         this.engineer = engineer;
         this.manager = manager;
@@ -44,6 +44,7 @@ public class Project extends Model {
         this.workEnd = workEnd;
         this.isGuaranteed = isGuaranteed;
         this.trouble = trouble;
+        this.troubleDescription = troubleDescription;
         this.type = type;
     }
 }

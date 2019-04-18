@@ -98,12 +98,19 @@ public class Application extends Controller {
     public static void projects(int sortType, int desc) {   //sortType = 0 - по сумме стимостей, 2 - по типу; desc = 0 - asc, desc = 1 = desc
         //по идее, стоимость деталей является избыточной, её нужно получать как сумму из DetailOrder'ов!
         List projects = null;
-        if(sortType == 0) {
-            String order = (desc == 1 ? "desc" : "asc");
+        String order = (desc == 1 ? " desc" : " asc");
+        if(sortType == 0) {     //по стоимости
             projects = Project.find(
-                    "Select p, (detailCost + workCost) as cost FROM Project p ORDER BY cost " + order
+                    "Select p, c.firstName, c.lastName, (detailCost + workCost) as cost FROM Project p JOIN Client c ON p.client = c ORDER BY cost" + order
             ).fetch();
         }
+        else
+        {
+            projects = Project.find(
+                    "Select p, c.firstName, c.lastName, (detailCost + workCost) as cost FROM Project p JOIN Client c ON p.client = c ORDER BY type" + order
+            ).fetch();
+        }
+
         render(projects);
     }
 
