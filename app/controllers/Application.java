@@ -101,7 +101,7 @@ public class Application extends Controller {
         if(sortType == 0) {
             String order = (desc == 1 ? "desc" : "asc");
             projects = Project.find(
-                    "Select p, (detailCost + workCost) as cost FROM Project p ORDER BY cost" + order
+                    "Select p, (detailCost + workCost) as cost FROM Project p ORDER BY cost " + order
             ).fetch();
         }
         render(projects);
