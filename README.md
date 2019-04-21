@@ -21,7 +21,7 @@
 > db.default.pass;
 5. В папке с установленным Play Framework в консоли выполните команду:
 > play run computerfirm (Windows);\
-> ./play run computerfirm (Linux);\
+> ./play run computerfirm (Linux);
 6. В браузере в строке поиска наберите URL:
 > localhost:9000
 7. На данный момент доступные URL:
