@@ -30,11 +30,11 @@
             </tr>
             </thead>
             <tbody>
-            #{if details}
+            #{if resultList}
 
                 #{list items:resultList, as:'project'}
                 <tr>
-                    <td>${project.id}</td>
+                    *{<td>${project.id}</td>}*
                     <td>${project.type}</td>
                     <td>${project.cost}</td>
                     <td>${project.description}</td>
