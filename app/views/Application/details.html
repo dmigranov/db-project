@@ -8,38 +8,45 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-    <title>Hello, world!</title>
+    <title>Details list</title>
 </head>
 
 #{extends 'main.html' /}
-
 <body>
-<h1>Most popular troubles</h1>
+    <h1>Detail's list</h1>
 
-<div class="troubles">
+    <div class="details_list">
 
-    <table class="table">
-        <thead>
-        <tr>
-            <th scope="col">Trouble name</th>
-            <th scope="col">Count</th>
-        </tr>
-        </thead>
-        <tbody>
-        #{if resultList}
-
-            #{list items:resultList, as:'trouble'}
+        <table class="table">
+            <thead>
             <tr>
-                <td>${trouble[0]}</td>
-                <td>${trouble[1]}</td>
+                <th scope="col">ID</th>
+                <th scope="col">Detail's type</th>
+                <th scope="col">Detail's cost</th>
+                <th scope="col">Name</th>
+                <th scope="col">Description</th>
+                <th scope="col">Amount</th>
+
             </tr>
-            #{/list}
+            </thead>
+            <tbody>
+            #{if details}
 
-        #{/if}
+                #{list items:resultList, as:'project'}
+                <tr>
+                    <td>${project.id}</td>
+                    <td>${project.type}</td>
+                    <td>${project.cost}</td>
+                    <td>${project.description}</td>
+                    <td>${project.count}</td>
 
-        </tbody>
-    </table>
-</div>
+                </tr>
+                #{/list}
+            #{/if}
+
+            </tbody>
+        </table>
+    </div>
 
 
 <!-- Optional JavaScript -->
