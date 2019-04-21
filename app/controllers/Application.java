@@ -19,7 +19,6 @@ public class Application extends Controller {
         Client client = Client.find("order by firstName desc").first();
 
         render(client);
-
     }
 
     public static void salary() {
