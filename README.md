@@ -18,7 +18,9 @@
 4. В файле computerfirm/conf/application.conf установите необходимые логин и пароль к установленной базе Oracle
 в полях соответственно;
 > db.default.user;\
-> db.default.pass;
+> db.default.pass;\
+> db.default.driver=oracle.jdbc.OracleDriver\
+> db.default.url=jdbc:oracle:thin:@localhost:1521/XE
 5. В папке с установленным Play Framework в консоли выполните команду:
 > play run computerfirm (Windows);\
 > ./play run computerfirm (Linux);
