@@ -13,12 +13,12 @@
 1. Перейдите в папку с установленным Play Framework;
 2. В консоли выполните команду:
 > play new computerfirm (Windows);\
-> ./play new computerfirm (Linux);\
+> ./play new computerfirm (Linux);
 3. Клонируйте содержимое репозитория в созданную папку computerfirm;
 4. В файле computerfirm/conf/application.conf установите необходимые логин и пароль к установленной базе Oracle
 в полях соответственно;
 > db.default.user;\
-> db.default.pass;\
+> db.default.pass;
 5. В папке с установленным Play Framework в консоли выполните команду:
 > play run computerfirm (Windows);\
 > ./play run computerfirm (Linux);\
@@ -29,7 +29,7 @@
 > /projects?{id}\
 > /details\
 > /allprojects\
-> /troubles\
+> /troubles
 
 ### Этап 3: распределение работ
 __Мигранов:__ каркас приложения, запросы, html-страницы\
