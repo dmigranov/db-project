@@ -12,26 +12,26 @@
   - Oracle Database 18c XE;
 1. Перейдите в папку с установленным Play Framework;
 2. В консоли выполните команду:
-> play new computerfirm (Windows);
-> ./play new computerfirm (Linux);
+> play new computerfirm (Windows);\
+> ./play new computerfirm (Linux);\
 3. Клонируйте содержимое репозитория в созданную папку computerfirm;
 4. В файле computerfirm/conf/application.conf установите необходимые логин и пароль к установленной базе Oracle
 в полях соответственно;
-> db.default.user;
-> db.default.pass;
+> db.default.user;\
+> db.default.pass;\
 5. В папке с установленным Play Framework в консоли выполните команду:
-> play run computerfirm (Windows);
-> ./play run computerfirm (Linux);
+> play run computerfirm (Windows);\
+> ./play run computerfirm (Linux);\
 6. В браузере в строке поиска наберите URL:
 > localhost:9000
 7. На данный момент доступные URL:
-> /salary
-> /projects?{id}
-> /details
-> /allprojects
-> /troubles
+> /salary\
+> /projects?{id}\
+> /details\
+> /allprojects\
+> /troubles\
 
 ### Этап 3: распределение работ
-__Мигранов:__ каркас приложения, запросы, html-страницы
+__Мигранов:__ каркас приложения, запросы, html-страницы\
 __Болдырев:__ html-страницы, запросы, README
 
