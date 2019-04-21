@@ -95,6 +95,22 @@ public class Application extends Controller {
         Detail detail2 = new Detail(processor, 11000, "AMD Ryzen 7", "not very good processor", 2);
         Detail detail3 = new Detail(videocard, 20000, "Nvidia GeForce 1660", "top videocard", 10);
         Detail detail4 = new Detail(videocard, 15000, "Nvidia GeForce 1080", "old videocard", 5);
+
+        processor.save();
+        motherboard.save();
+        ram.save();
+        videocard.save();
+        storage.save();
+        powersupply.save();
+        networkcard.save();
+        diskstorage.save();
+
+
+        detail1.save();
+        detail2.save();
+        detail3.save();
+        detail4.save();
+
     }
 
     ///выводит список всех проектов, на которых задействован работник
