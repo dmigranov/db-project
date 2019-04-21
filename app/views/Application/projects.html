@@ -15,14 +15,9 @@
 #{set title:'All projects' /}
 
 <body>
-#{if employee}
-    #{if employee.position.equals("manager")}
-    <h1>Manager ${employee.firstName} ${employee.lastName}'s projects</h1>
-    #{/if}
-    #{else }
-    <h1>Engineer ${employee.firstName} ${employee.lastName}'s projects</h1>
-    #{/else}
-#{/if}
+
+<h1>All projects</h1>
+
 
 <div class="employees-projects">
 
