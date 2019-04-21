@@ -29,7 +29,7 @@
 > /projects?{id}\
 > /details\
 > /allprojects\
-> /troubles\
+> /troubles
 
 ### Этап 3: распределение работ
 __Мигранов:__ каркас приложения, запросы, html-страницы\
