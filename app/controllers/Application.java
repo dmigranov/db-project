@@ -80,6 +80,21 @@ public class Application extends Controller {
         Employee engineer = new Employee("Tttt", "Cccc", "fdsfsdf", "89003431234", "vano@google.com", 40000, 0.05).save();
         System.out.println(validation.valid(engineer).ok);
         */
+
+        DetailType processor = new DetailType("processor");
+        DetailType motherboard = new DetailType("motherboard");
+        DetailType ram = new DetailType("ram");
+        DetailType videocard = new DetailType("video card");
+        DetailType storage = new DetailType("storage");
+        DetailType powersupply = new DetailType("power supply");
+        DetailType networkcard = new DetailType("network card");
+        DetailType diskstorage = new DetailType("disk storage");
+
+//        DetailType type, int cost, String name, String description, int count
+        Detail detail1 = new Detail(processor, 10000, "Intel Core i7", "very good processor", 3);
+        Detail detail2 = new Detail(processor, 11000, "AMD Ryzen 7", "not very good processor", 2);
+        Detail detail3 = new Detail(videocard, 20000, "Nvidia GeForce 1660", "top videocard", 10);
+        Detail detail4 = new Detail(videocard, 15000, "Nvidia GeForce 1080", "old videocard", 5);
     }
 
     ///выводит список всех проектов, на которых задействован работник
@@ -118,6 +133,22 @@ public class Application extends Controller {
     public static void popularDetails(long id) {
         Detail.find("Select count(d.id) FROM Detail d JOIN DetailOrder o ON DetailOrder.detail = d WHERE d.type = ?1 GROUP BY d.id", id).fetch(5);
         render();
+    }
+
+    public static void details() throws SQLException {
+        Connection conn = DB.getConnection();
+        Statement statement = conn.createStatement();
+        boolean isResultSet = statement.execute("select * from Detail d_table ORDER BY name");
+        ResultSet resultSet = null;
+        List<Object[]> resultList = new ArrayList<>();
+        if (isResultSet) {
+            resultSet = statement.getResultSet();
+            while (resultSet.next()) {
+                resultList.add(new Object[]{resultSet.getString("name")});
+            }
+        }
+
+        render(resultList);
     }
 
 }
