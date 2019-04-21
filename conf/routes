@@ -14,15 +14,18 @@ GET     /troubles                               Application.troubles
 # Fill DB
 GET     /fill                                   Application.fillDB
 
-# Details
-GET     /details                               Application.details
+# Popular Details
+GET     /populardetails                         Application.popularDetails
 
 #Employees' projects
 #GET     /projects/{id}                         Application.projectsOfEmployee       #через слеш
 GET      /projects                              Application.projectsOfEmployee       #через вопросики - как лучше?
 
 #Details
-GET      /details                              Application.details
+GET      /details                               Application.details
+
+#All projects
+GET      /allprojects                           Application.projects
 
 # Ignore favicon requests
 GET     /favicon.ico                            404
