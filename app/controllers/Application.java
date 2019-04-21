@@ -49,6 +49,7 @@ public class Application extends Controller {
         render(resultList);
     }
 
+
     public void fillDB() {
         /*Client ivan = new Client("Ivan", "Ivanov", "89003431234", "vano@google.com", false).save();
         new Client("FSfds", "fdsfds", "89003431234", "vdsgle.com", false).save();
@@ -80,9 +81,23 @@ public class Application extends Controller {
         Employee engineer = new Employee("Tttt", "Cccc", "fdsfsdf", "89003431234", "vano@google.com", 40000, 0.05).save();
         System.out.println(validation.valid(engineer).ok);
         */
+        // Процессор, мат.плата, оперативная память, видеокарта, накопитель, блок питания, сетевая карта, дисковод
+        DetailType processor = new DetailType("processor");
+        DetailType motherboard = new DetailType("motherboard");
+        DetailType ram = new DetailType("ram");
+        DetailType videocard = new DetailType("video card");
+        DetailType storage = new DetailType("storage");
+        DetailType powersupply = new DetailType("power supply");
+        DetailType networkcard = new DetailType("network card");
+        DetailType diskstorage = new DetailType("disk storage");
+
+//        DetailType type, int cost, String name, String description, int count
+        Detail detail1 = new Detail(processor, 10000, "Intel Core i7", "very good processor", 3);
+        Detail detail2 = new Detail(processor, 11000, "AMD Ryzen 7", "not very good processor", 2);
+        Detail detail3 = new Detail(videocard, 20000, "Nvidia GeForce 1660", "top videocard", 10);
+        Detail detail4 = new Detail(videocard, 15000, "Nvidia GeForce 1080", "old videocard", 5);
     }
 
-    ///выводит список всех проектов, на которых задействован работник
     public static void projectsOfEmployee(long id, Date startDate, Date endDate) {      //todo: дата
 
         List projects = Project.find(
@@ -94,31 +109,37 @@ public class Application extends Controller {
         render(projects, employee);
     }
 
-    ///выводит список всех проектов и сортирует их
-    public static void projects(int sortType, int desc) {   //sortType = 0 - по сумме стимостей, 2 - по типу; desc = 0 - asc, desc = 1 = desc
-        //todo: по идее, стоимость деталей является избыточной, её нужно получать как сумму из DetailOrder'ов!
-        List projects = null;
-        String order = (desc == 1 ? " desc" : " asc");
-        if(sortType == 0) {     //по стоимости
-            projects = Project.find(
-                    "Select p, c.firstName, c.lastName, (detailCost + workCost) as cost FROM Project p JOIN Client c ON p.client = c ORDER BY cost" + order
-            ).fetch();
-        }
-        else
-        {
-            projects = Project.find(
-                    "Select p, c.firstName, c.lastName, (detailCost + workCost) as cost FROM Project p JOIN Client c ON p.client = c ORDER BY type" + order
-            ).fetch();
-        }
+    public static void projects(boolean sortType, boolean desc) {   //sortType = 0 - по стоимости, 1 - по типу
 
-        render(projects);
+        /*List projects = Project.find(
+                "Select p, c.firstName, c.lastName FROM Project p JOIN Client c ON p.client = c  where p.engineer.id = ?1 or p.manager.id = ?1", id
+        ).fetch();*/
+
+
+        //render(projects, employee);
     }
 
-    //id - detailType.id НЕ готово!!!!
-    public static void popularDetails(long id) {
-        Detail.find("Select d FROM Detail d JOIN DetailOrder o ON DetailOrder.detail = d WHERE d.type = ?1 GROUP BY d.id", id).fetch(5);
+    public static void popularDetails(boolean sortType, boolean desc) {   //sortType = 0 - по стоимости, 1 - по типу
 
-        render();
     }
 
+    /*Проблемная функция
+    Сделал по твоему образцу, добавил GET /details в файл routes, создал соответствующую страничку -
+    зайти по адресу localhost:9000/details не могу
+     */
+    public static void details() throws SQLException {
+        Connection conn = DB.getConnection();
+        Statement statement = conn.createStatement();
+        boolean isResultSet = statement.execute("select * from Detail d_table ORDER BY name");
+        ResultSet resultSet = null;
+        List<Object[]> resultList = new ArrayList<>();
+        if (isResultSet) {
+            resultSet = statement.getResultSet();
+            while (resultSet.next()) {
+                resultList.add(new Object[]{resultSet.getString("name")});
+            }
+        }
+
+        render(resultList);
+    }
 }
