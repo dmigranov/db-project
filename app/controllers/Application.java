@@ -147,7 +147,12 @@ public class Application extends Controller {
 
     public static void addProject()
     {
+        Application.addProjectPage();
+    }
 
+    public static void addProjectPage()
+    {
+        render();
     }
         //id - detailType.id
     public static void popularDetails(long id) {

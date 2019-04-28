@@ -27,6 +27,10 @@ POST     /details                               Application.addDetail
 #All projects
 GET      /allprojects                           Application.projects
 
+GET      /addproject                            Application.addProjectPage
+POST     /addproject                            Application.addProject
+
+
 # Ignore favicon requests
 GET     /favicon.ico                            404
 
