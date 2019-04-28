@@ -145,7 +145,11 @@ public class Application extends Controller {
         render(projects);
     }
 
-    //id - detailType.id
+    public static void addProject()
+    {
+
+    }
+        //id - detailType.id
     public static void popularDetails(long id) {
         Detail.find("Select count(d.id) FROM Detail d JOIN DetailOrder o ON DetailOrder.detail = d WHERE d.type = ?1 GROUP BY d.id", id).fetch(5);
         render();
