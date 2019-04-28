@@ -19,7 +19,7 @@ public class Project extends Model {
     @ManyToOne
     Employee manager;
 
-    @Min(0) long detailCost; //нужно ли хранить? можно же посчитаьт
+    @Min(0)long detailCost; //нужно ли хранить? можно же посчитаьт
     @Min(0)int workCost;
 
     Date workBegin;

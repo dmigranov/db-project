@@ -152,6 +152,7 @@ public class Application extends Controller {
 
     public static void addProjectPage()
     {
+        //todo: в добавлении проекта надо как-то выбирать много деталей со склада... потом суммировать их стоимость!
         render();
     }
         //id - detailType.id
