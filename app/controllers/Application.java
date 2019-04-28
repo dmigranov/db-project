@@ -172,8 +172,8 @@ public class Application extends Controller {
         }*/ //это же неправильно (точнее, возвращает только бесструктурные имена), я объяснил
 
         String error = detailsError;
-        render(resultList, types, error);
         detailsError = null;
+        render(resultList, types, error);
     }
 
     public static void addDetail(String name, String description, int cost, int count, long type) {
