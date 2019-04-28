@@ -19,6 +19,7 @@
     <div class="form-group">
         <h3><label for="exampleFormControlSelect1">Выберите работника</label></h3>
         <select name = 'id' class="form-control" id="exampleFormControlSelect1">
+            <option value = -1>---</option>
             #{list items:employees, as:'employeeIter'}
                 #{if employee == employeeIter}
                     <option value = ${employeeIter.id} selected>${employeeIter.firstName} ${employeeIter.lastName}</option>
