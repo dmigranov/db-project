@@ -23,7 +23,7 @@ GET      /projects                              Application.projectsOfEmployee  
 
 #Details
 GET      /details                               Application.details
-
+POST     /details                               Application.addDetail
 #All projects
 GET      /allprojects                           Application.projects
 

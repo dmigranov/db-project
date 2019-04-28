@@ -15,14 +15,33 @@
 #{set title:'Details' /}
 
 <body>
-    <h1>Detail's list</h1>
+    <h1>Details list</h1>
+
+    <h3>Want to add a detail?</h3>
+    <form method="get">
+        <div class="form-group">
+            <input type="text" class="form-control" id="exampleFormControlInput1" name = 'name' placeholder="Name">
+            <input type="text" class="form-control" id="exampleFormControlInput2" name = 'description' placeholder="Description">
+            <input type="text" class="form-control" id="exampleFormControlInput3" name = 'cost' placeholder="Cost">
+            <select name = 'type' class="form-control" id="exampleFormControlSelect1">
+            #{list items:types, as:'type'}
+                <option value = ${type.id} >${type.name}</option>
+            #{/list}
+            </select>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-10">
+                <button type="submit" class="btn btn-default">Добавить</button>
+            </div>
+        </div>
+    </form>
+
 
     <div class="details_list">
 
         <table class="table">
             <thead>
             <tr>
-                <th scope="col">ID</th>
                 <th scope="col">Detail's type</th>
                 <th scope="col">Detail's cost</th>
                 <th scope="col">Name</th>
@@ -33,14 +52,14 @@
             </thead>
             <tbody>
             #{if resultList}
-
-                #{list items:resultList, as:'project'}
+                #{list items:resultList, as:'detail'}
                 <tr>
                     *{<td>${project.id}</td>}*
-                    <td>${project.type}</td>
-                    <td>${project.cost}</td>
-                    <td>${project.description}</td>
-                    <td>${project.count}</td>
+                    <td>${detail.type.name}</td>
+                    <td>${detail.cost}</td>
+                    <td>${detail.name}</td>
+                    <td>${detail.description}</td>
+                    <td>${detail.count}</td>
 
                 </tr>
                 #{/list}

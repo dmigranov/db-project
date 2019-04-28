@@ -152,7 +152,11 @@ public class Application extends Controller {
     }
 
     public static void details() throws SQLException {
-        Connection conn = DB.getConnection();
+        //todo: сделать возможность изменения количества деталей (только добавления, удалять будем при заказах (триггер))!!!
+        List types = DetailType.findAll();
+
+        List resultList = Detail.findAll();
+        /*Connection conn = DB.getConnection();
         Statement statement = conn.createStatement();
         boolean isResultSet = statement.execute("select * from Detail d_table ORDER BY name");
         ResultSet resultSet = null;
@@ -162,9 +166,9 @@ public class Application extends Controller {
             while (resultSet.next()) {
                 resultList.add(new Object[]{resultSet.getString("name")});
             }
-        }
+        }*/ //это же неправильно (точнее, возвращает только бесструктурные имена), я объяснил
 
-        render(resultList);
+        render(resultList, types);
     }
 
 }
