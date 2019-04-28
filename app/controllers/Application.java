@@ -120,8 +120,9 @@ public class Application extends Controller {
         ).fetch();
 
         Employee employee = Employee.findById(id);
+        List employees = Employee.findAll();
 
-        render(projects, employee);
+        render(projects, employee, employees);
     }
 
     ///выводит список всех проектов и сортирует их
