@@ -171,4 +171,10 @@ public class Application extends Controller {
         render(resultList, types);
     }
 
+    public static void addDetail(String name, String description, int cost, int count, long type) throws SQLException {
+        System.out.println(name + description + type);
+
+        Application.details();
+    }
+
 }
