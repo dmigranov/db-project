@@ -11,7 +11,7 @@ public class Detail extends Model {
     @ManyToOne
     DetailType type;
 
-    @Min(0)int cost;
+    @Min(1)int cost;
 
     String name;
     String description;

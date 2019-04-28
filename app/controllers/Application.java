@@ -151,7 +151,10 @@ public class Application extends Controller {
         render();
     }
 
-    public static void details() throws SQLException {
+
+    static private String detailsError;
+
+    public static void details() {
         //todo: сделать возможность изменения количества деталей (только добавления, удалять будем при заказах (триггер))!!!
         List types = DetailType.findAll();
 
@@ -168,21 +171,25 @@ public class Application extends Controller {
             }
         }*/ //это же неправильно (точнее, возвращает только бесструктурные имена), я объяснил
 
-        render(resultList, types);
+        String error = detailsError;
+        render(resultList, types, error);
+        detailsError = null;
     }
 
-    public static void addDetail(String name, String description, int cost, int count, long type) throws SQLException {
+    public static void addDetail(String name, String description, int cost, int count, long type) {
         DetailType detailType = DetailType.findById(type);
-        Detail detail = new Detail(detailType, cost, name, description, count);
 
-        if(!validation.valid(detail).ok)
-        {
-            //передать в html сообщение об ошибке
+        if(!"".equals(name) && !"".equals(description)) {
+            Detail detail = new Detail(detailType, cost, name, description, count);
+
+            if (!validation.valid(detail).ok) {
+                detailsError = "Impossible to add a detail!";
+            } else {
+                detail.save();
+            }
         }
         else
-        {
-            detail.save();
-        }
+            detailsError = "Impossible to add a detail! Please fill in fields!";
 
         Application.details();
     }

@@ -16,6 +16,11 @@
 
 <body>
     <h1>Details list</h1>
+    #{if error}
+        <div class="alert alert-primary" role="alert">
+            ${error}
+        </div>
+    #{/if}
 
     <h3>Want to add a detail?</h3>
     <form method="post">
