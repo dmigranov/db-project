@@ -12,22 +12,22 @@
 </head>
 
 #{extends 'main.html' /}
+#{set title:'Computer firm' /}
 
 <body>
-<h1>Hello, world!</h1>
+<div style="text-align: center;"><h1>Супер-Крутые Компьютеры</h1></div>
 
-#{if client}
-<div class="client">
-    <h2 class="client-name">
-        <a href="#">${client.firstName}</a>
-    </h2>
-    <div class="post-metadata">
-        <span class="client-email">e-mail ${client.email}</span>
+<br/>
 
-    </div>
+<h2>Что Вы хотите сделать?</h2>
 
+<br/>
 
-#{/if}
+<div class="list-group">
+    <a href="/projects?id=-1" class="list-group-item list-group-item-action">Посмотреть проекты по сотрудникам</a>
+    <a href="/salary" class="list-group-item list-group-item-action">Посмотеть зарплаты</a>
+
+</div>
 
 <!-- Optional JavaScript -->
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
