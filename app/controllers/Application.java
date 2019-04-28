@@ -35,7 +35,7 @@ public class Application extends Controller {
 
         Connection conn = DB.getConnection();
         Statement statement = conn.createStatement();
-        boolean isResultSet = statement.execute("select t.name as t_name, trouble_count FROM Trouble t JOIN (select t.id as id, count(*) as trouble_count FROM Project p JOIN Trouble t ON p.trouble_id = t.id GROUP BY t.id) tc ON t.id = tc.id");
+        boolean isResultSet = statement.execute("select t.name as t_name, trouble_count FROM Trouble t JOIN (select t.id as id, count(*) as trouble_count FROM Project p JOIN Trouble t ON p.trouble_id = t.id GROUP BY t.id) tc ON t.id = tc.id ORDER BY trouble_count DESC");
         ResultSet resultSet = null;
         List<Object[]> resultList = new ArrayList<>();
         if (isResultSet) {
