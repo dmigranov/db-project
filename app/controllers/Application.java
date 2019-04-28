@@ -172,7 +172,17 @@ public class Application extends Controller {
     }
 
     public static void addDetail(String name, String description, int cost, int count, long type) throws SQLException {
-        System.out.println(name + description + type);
+        DetailType detailType = DetailType.findById(type);
+        Detail detail = new Detail(detailType, cost, name, description, count);
+
+        if(!validation.valid(detail).ok)
+        {
+            //передать в html сообщение об ошибке
+        }
+        else
+        {
+            detail.save();
+        }
 
         Application.details();
     }
