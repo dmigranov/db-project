@@ -224,4 +224,13 @@ public class Application extends Controller {
         render(employees);
     }
 
+    public static void changeEmployeesList(String id)
+    {
+        //List<Employee> employees = Employee.find("order by salary desc").fetch();
+        System.out.println(id);
+
+        getEmployees(null);
+    }
+
+
 }

@@ -19,6 +19,7 @@ GET     /populardetails                         Application.popularDetails
 
 # Управление списком сотрудников
 GET     /employees                              Application.getEmployees
+POST    /employees                              Application.changeEmployeesList
 
 #Employees' projects
 #GET     /projects/{id}                         Application.projectsOfEmployee       #через слеш
