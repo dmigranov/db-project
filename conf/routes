@@ -17,6 +17,9 @@ GET     /fill                                   Application.fillDB
 # Popular Details
 GET     /populardetails                         Application.popularDetails
 
+# Управление списком сотрудников
+GET     /employees                              Application.getEmployees
+
 #Employees' projects
 #GET     /projects/{id}                         Application.projectsOfEmployee       #через слеш
 GET      /projects                              Application.projectsOfEmployee       #через вопросики - как лучше?

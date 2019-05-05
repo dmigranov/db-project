@@ -216,4 +216,11 @@ public class Application extends Controller {
         Application.details();
     }
 
+    public static void getEmployees(String position)
+    {
+
+
+        render();
+    }
+
 }
