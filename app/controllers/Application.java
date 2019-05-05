@@ -218,9 +218,10 @@ public class Application extends Controller {
 
     public static void getEmployees(String position)
     {
+        List<Employee> employees = Employee.find("order by salary desc").fetch();
 
 
-        render();
+        render(employees);
     }
 
 }
