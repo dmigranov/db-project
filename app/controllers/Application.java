@@ -232,5 +232,14 @@ public class Application extends Controller {
         getEmployees(null);
     }
 
+    public static void deleteEmployee(long id)
+    {
+        //List<Employee> employees = Employee.find("order by salary desc").fetch();
+        //System.out.println(id);
+        Employee.delete("delete from Employee where id = ?1", id);
+
+        getEmployees(null);
+    }
+
 
 }
