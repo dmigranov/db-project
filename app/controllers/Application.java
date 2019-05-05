@@ -165,12 +165,11 @@ public class Application extends Controller {
 
         Connection conn = DB.getConnection();
         Statement statement = conn.createStatement();
-        //String query = "SELECT * FROM Detail d JOIN (Select d.id, sum(o.count) as count FROM Detail d JOIN DetailOrder o ON o.detail_id = d.id WHERE d.type_id = " + id + " GROUP BY d.id) counts ON d.id = counts.id";
-        String query = "Select d.id, sum(o.count) as count FROM Detail d JOIN DetailOrder o ON o.detail_id = d.id WHERE d.type_id = " + id + " GROUP BY d.id";
+        String query = "SELECT * FROM Detail d JOIN (Select d.id as d_id, sum(o.count) as buyCount FROM Detail d JOIN DetailOrder o ON o.detail_id = d.id WHERE d.type_id = " + id + " GROUP BY d.id) counts ON d.id = counts.d_id";
         ResultSet resultSet = statement.executeQuery(query);
         List<Object[]> resultList = new ArrayList<>();
         while (resultSet.next()) {
-            resultList.add(new Object[]{resultSet.getString("id"), resultSet.getInt("count")});
+            resultList.add(new Object[]{resultSet.getString("id"), resultSet.getInt("buyCount")});
         }
 
 
