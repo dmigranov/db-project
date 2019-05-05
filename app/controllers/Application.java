@@ -216,7 +216,7 @@ public class Application extends Controller {
         Application.details();
     }
 
-    public static void getEmployees(String position)
+    public static void getEmployees(String position)    //может, добавить сортировку (выбор только менеджеров/инженеров)?
     {
         List<Employee> employees = Employee.find("order by salary desc").fetch();
 
@@ -224,18 +224,16 @@ public class Application extends Controller {
         render(employees);
     }
 
-    public static void addEmployee(String id)
+    public static void addEmployee(String firstName, String lastName, String phoneNumber, String email, int salary, double bonusPercent, String position)
     {
-        //List<Employee> employees = Employee.find("order by salary desc").fetch();
-        System.out.println(id);
+        //todo
+
 
         getEmployees(null);
     }
 
     public static void deleteEmployee(long id)
     {
-        //List<Employee> employees = Employee.find("order by salary desc").fetch();
-        //System.out.println(id);
         Employee.delete("delete from Employee where id = ?1", id);
 
         getEmployees(null);
