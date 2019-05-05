@@ -80,7 +80,7 @@ public class Application extends Controller {
         System.out.println(validation.valid(engineer).ok);
         */
 
-        DetailType processor = new DetailType("processor");
+        /*DetailType processor = new DetailType("processor");
         DetailType motherboard = new DetailType("motherboard");
         DetailType ram = new DetailType("ram");
         DetailType videocard = new DetailType("video card");
@@ -108,7 +108,9 @@ public class Application extends Controller {
         detail1.save();
         detail2.save();
         detail3.save();
-        detail4.save();
+        detail4.save();*/
+
+        //new DetailOrder((Project)Project.findAll().get(0), (Detail)Detail.findAll().get(5), 2).save();
 
     }
 
@@ -158,10 +160,22 @@ public class Application extends Controller {
 
         //id - detailType.id
     public static void popularDetails(long id) throws SQLException {
-        List popularDetails =  Detail.find("Select d.id, count(d.id) FROM Detail d LEFT JOIN DetailOrder o ON o.detail = d WHERE d.type.id = ?1 GROUP BY d.id", id).fetch(5);
-        List detailTypes = DetailType.findAll();
+        //List popularDetails =  Detail.find("Select d.id, count(d.id) FROM Detail d LEFT JOIN DetailOrder o ON o.detail = d WHERE d.type.id = ?1 GROUP BY d.id", id).fetch(5);
+        //List detailTypes = DetailType.findAll();
 
-        render();
+        Connection conn = DB.getConnection();
+        Statement statement = conn.createStatement();
+        //String query = "SELECT * FROM Detail d JOIN (Select d.id, sum(o.count) as count FROM Detail d JOIN DetailOrder o ON o.detail_id = d.id WHERE d.type_id = " + id + " GROUP BY d.id) counts ON d.id = counts.id";
+        String query = "Select d.id, sum(o.count) as count FROM Detail d JOIN DetailOrder o ON o.detail_id = d.id WHERE d.type_id = " + id + " GROUP BY d.id";
+        ResultSet resultSet = statement.executeQuery(query);
+        List<Object[]> resultList = new ArrayList<>();
+        while (resultSet.next()) {
+            resultList.add(new Object[]{resultSet.getString("id"), resultSet.getInt("count")});
+        }
+
+
+
+        render(resultList);
     }
 
 

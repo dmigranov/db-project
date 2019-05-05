@@ -13,59 +13,27 @@
 #{set title:'Most popular details' /}
 
 <body>
-<h1>All projects</h1>
+<h1>Most popular troubles</h1>
 
-<div class="projects">
+<div class="troubles">
+
     <table class="table">
         <thead>
         <tr>
-            <th scope="col">ID</th>
-            <th scope="col">Detail cost</th>
-            <th scope="col">Work cost</th>
-            <th scope="col">Сost</th>
-            <th scope="col">Start of work</th>
-            <th scope="col">End of work</th>
-            <th scope="col">Is guaranteed</th>
-            <th scope="col">Trouble description</th>
-            <th scope="col">Type</th>
-            <th scope="col">Client name</th>
-
+            <th scope="col">Trouble name</th>
+            <th scope="col">Count</th>
         </tr>
         </thead>
         <tbody>
-        #{if projects}
+        #{if resultList}
 
-            #{list items:projects, as:'project'}
+            #{list items:resultList, as:'trouble'}
             <tr>
-                <td>${project[0].id}</td>
-                <td>${project[0].detailCost}</td>
-                <td>${project[0].workCost}</td>
-                <td>${project[3]}</td>
-                <td>${project[0].workBegin}</td>
-                <td>${project[0].workEnd}</td>
-                #{if project[0].isGuaranteed}
-                    <td>Yes</td>
-                #{/if}
-                #{else }
-                    <td>No</td>
-                #{/else}
-                #{if project[0].troubleDescription == null}
-                    <td>-</td>
-                #{/if}
-                #{else }
-                    <th scope="col">${project[0].troubleDescription}</th>
-                #{/else}
-                #{if project[0].type == false}
-                    <td>Build</td>
-                #{/if}
-                #{else }
-                    <td>Repair</td>
-                #{/else}
-                <td>${project[1]} ${project[2]}</td>
-
-
+                <td>${trouble[0]}</td>
+                <td>${trouble[1]}</td>
             </tr>
             #{/list}
+
         #{/if}
 
         </tbody>
