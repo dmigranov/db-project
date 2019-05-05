@@ -3,8 +3,10 @@ package models;
 import play.data.validation.Min;
 import play.db.jpa.Model;
 
+import javax.persistence.Entity;
 import javax.persistence.ManyToOne;
 
+@Entity
 public class DetailOrder extends Model {
     @ManyToOne
     public Project project;

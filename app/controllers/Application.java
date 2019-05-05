@@ -155,9 +155,13 @@ public class Application extends Controller {
         //todo: в добавлении проекта надо как-то выбирать много деталей со склада... потом суммировать их стоимость!
         render();
     }
+
         //id - detailType.id
-    public static void popularDetails(long id) {
-        Detail.find("Select count(d.id) FROM Detail d JOIN DetailOrder o ON DetailOrder.detail = d WHERE d.type = ?1 GROUP BY d.id", id).fetch(5);
+    public static void popularDetails(long id) throws SQLException {
+        Detail.find("Select count(d.id) FROM Detail d JOIN DetailOrder o ON o.detail = d WHERE d.type.id = ?1 GROUP BY d.id", id).fetch(5);
+        //DetailOrder.find("Select count(d.id) FROM DetailOrder o JOIN Detail d ON o.detail = d WHERE d.type = ?1 GROUP BY d.id", id).fetch(5);
+
+
         render();
     }
 
