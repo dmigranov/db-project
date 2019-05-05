@@ -158,9 +158,8 @@ public class Application extends Controller {
 
         //id - detailType.id
     public static void popularDetails(long id) throws SQLException {
-        Detail.find("Select count(d.id) FROM Detail d JOIN DetailOrder o ON o.detail = d WHERE d.type.id = ?1 GROUP BY d.id", id).fetch(5);
-        //DetailOrder.find("Select count(d.id) FROM DetailOrder o JOIN Detail d ON o.detail = d WHERE d.type = ?1 GROUP BY d.id", id).fetch(5);
-
+        List popularDetails =  Detail.find("Select d.id, count(d.id) FROM Detail d LEFT JOIN DetailOrder o ON o.detail = d WHERE d.type.id = ?1 GROUP BY d.id", id).fetch(5);
+        List detailTypes = DetailType.findAll();
 
         render();
     }
