@@ -19,7 +19,7 @@ GET     /populardetails                         Application.popularDetails
 
 # Управление списком сотрудников
 GET     /employees                              Application.getEmployees
-POST    /employees                              Application.changeEmployeesList
+POST    /employees                              Application.addEmployee
 POST    /deleteEmployee                         Application.deleteEmployee
 
 

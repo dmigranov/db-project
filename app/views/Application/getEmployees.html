@@ -39,13 +39,14 @@
     <div class="form-group">
         <input type="text" class="form-control" id="exampleFormControlInput1" name = 'firstName' placeholder="First name">
         <input type="text" class="form-control" id="exampleFormControlInput5" name = 'secondName' placeholder="Second name">
-        <input type="text" class="form-control" id="exampleFormControlInput2" name = 'description' placeholder="Description">
-        <input type="text" class="form-control" id="exampleFormControlInput3" name = 'cost' placeholder="Cost">
-        <input type="text" class="form-control" id="exampleFormControlInput4" name = 'count' placeholder="Count">
-        <select name = 'type' class="form-control" id="exampleFormControlSelect1">
-        #{list items:types, as:'type'}
-            <option value = ${type.id} >${type.name}</option>
-        #{/list}
+        <input type="text" class="form-control" id="exampleFormControlInput2" name = 'phoneNumber' placeholder="Phone number">
+        <input type="text" class="form-control" id="exampleFormControlInput3" name = 'email' placeholder="E-mail">
+        <input type="text" class="form-control" id="exampleFormControlInput4" name = 'salary' placeholder="Salary">
+        <input type="text" class="form-control" id="exampleFormControlInput6" name = 'bonusPercent' placeholder="Bonus percent">
+
+        <select name = 'position' class="form-control" id="exampleFormControlSelect1">
+            <option value = "engineer" >Engineer</option>
+            <option value = "manager" >Manager</option>
         </select>
     </div>
     <div class="form-group">
