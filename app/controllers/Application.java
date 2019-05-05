@@ -158,20 +158,15 @@ public class Application extends Controller {
         render();
     }
 
-        //id - detailType.id
     public static void popularDetails(long type) throws SQLException {
-        //List popularDetails =  Detail.find("Select d.id, count(d.id) FROM Detail d LEFT JOIN DetailOrder o ON o.detail = d WHERE d.type.id = ?1 GROUP BY d.id", id).fetch(5);
-        //List detailTypes = DetailType.findAll();
-
         Connection conn = DB.getConnection();
         Statement statement = conn.createStatement();
-        String query = "SELECT * FROM Detail d JOIN (Select d.id as d_id, sum(o.count) as buyCount FROM Detail d JOIN DetailOrder o ON o.detail_id = d.id WHERE d.type_id = " + type + " GROUP BY d.id) counts ON d.id = counts.d_id ORDER BY buyCount DESC";
+        String query = "SELECT * FROM Detail d JOIN (Select d.id as d_id, sum(coalesce(o.count, 0)) as buyCount FROM Detail d /*LEFT*/ JOIN DetailOrder o ON o.detail_id = d.id WHERE d.type_id = " + type + " GROUP BY d.id) counts ON d.id = counts.d_id ORDER BY buyCount DESC";
         ResultSet resultSet = statement.executeQuery(query);
         List<Object[]> resultList = new ArrayList<>();
         while (resultSet.next()) {
-            resultList.add(new Object[]{resultSet.getString("id"), resultSet.getInt("buyCount")});
+            resultList.add(new Object[]{resultSet.getString("name"), resultSet.getString("description"), resultSet.getInt("buyCount")});
         }
-
 
         List types = DetailType.findAll();
         long type_id = type;
