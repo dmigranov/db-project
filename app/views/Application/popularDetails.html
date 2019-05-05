@@ -13,9 +13,31 @@
 #{set title:'Most popular details' /}
 
 <body>
-<h1>Most popular troubles</h1>
+<h1>Most popular details </h1>
 
-<div class="troubles">
+<form method="get">
+    <div class="form-group">
+        <h3><label for="exampleFormControlSelect1">Выберите тип деталей</label></h3>
+        <select name = 'type' class="form-control" id="exampleFormControlSelect1">
+            <option value = -1>---</option>
+        #{list items:types, as:'typeIter'}
+            #{if type_id == typeIter.id}
+                <option value = ${typeIter.id} selected>${typeIter.name}</option>
+            #{/if}
+            #{else }
+                <option value = ${typeIter.id} >${typeIter.name}</option>
+            #{/else}
+        #{/list}
+        </select>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-default">Найти</button>
+        </div>
+    </div>
+</form>
+
+<div class="details">
 
     <table class="table">
         <thead>

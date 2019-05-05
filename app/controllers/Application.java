@@ -159,13 +159,13 @@ public class Application extends Controller {
     }
 
         //id - detailType.id
-    public static void popularDetails(long id) throws SQLException {
+    public static void popularDetails(long type) throws SQLException {
         //List popularDetails =  Detail.find("Select d.id, count(d.id) FROM Detail d LEFT JOIN DetailOrder o ON o.detail = d WHERE d.type.id = ?1 GROUP BY d.id", id).fetch(5);
         //List detailTypes = DetailType.findAll();
 
         Connection conn = DB.getConnection();
         Statement statement = conn.createStatement();
-        String query = "SELECT * FROM Detail d JOIN (Select d.id as d_id, sum(o.count) as buyCount FROM Detail d JOIN DetailOrder o ON o.detail_id = d.id WHERE d.type_id = " + id + " GROUP BY d.id) counts ON d.id = counts.d_id";
+        String query = "SELECT * FROM Detail d JOIN (Select d.id as d_id, sum(o.count) as buyCount FROM Detail d JOIN DetailOrder o ON o.detail_id = d.id WHERE d.type_id = " + type + " GROUP BY d.id) counts ON d.id = counts.d_id ORDER BY buyCount DESC";
         ResultSet resultSet = statement.executeQuery(query);
         List<Object[]> resultList = new ArrayList<>();
         while (resultSet.next()) {
@@ -173,8 +173,9 @@ public class Application extends Controller {
         }
 
 
-
-        render(resultList);
+        List types = DetailType.findAll();
+        long type_id = type;
+        render(resultList, types, type_id);
     }
 
 
