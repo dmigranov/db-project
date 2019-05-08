@@ -5,11 +5,9 @@ import play.data.validation.Valid;
 import play.db.DB;
 import play.mvc.*;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.*;
+import java.util.Date;
 
 import models.*;
 
@@ -161,9 +159,12 @@ public class Application extends Controller {
 
     public static void popularDetails(long type) throws SQLException {
         Connection conn = DB.getConnection();
-        Statement statement = conn.createStatement();
-        String query = "SELECT * FROM Detail d JOIN (Select d.id as d_id, sum(coalesce(o.count, 0)) as buyCount FROM Detail d /*LEFT*/ JOIN DetailOrder o ON o.detail_id = d.id WHERE d.type_id = " + type + " GROUP BY d.id) counts ON d.id = counts.d_id ORDER BY buyCount DESC";
-        ResultSet resultSet = statement.executeQuery(query);
+        //Statement statement = conn.createStatement();
+        //String query = "SELECT * FROM Detail d JOIN (Select d.id as d_id, sum(coalesce(o.count, 0)) as buyCount FROM Detail d /*LEFT*/ JOIN DetailOrder o ON o.detail_id = d.id WHERE d.type_id = " + type + " GROUP BY d.id) counts ON d.id = counts.d_id ORDER BY buyCount DESC";
+        String query = "SELECT * FROM Detail d JOIN (Select d.id as d_id, sum(coalesce(o.count, 0)) as buyCount FROM Detail d /*LEFT*/ JOIN DetailOrder o ON o.detail_id = d.id WHERE d.type_id = ? GROUP BY d.id) counts ON d.id = counts.d_id ORDER BY buyCount DESC";
+        PreparedStatement statement = conn.prepareStatement(query);
+        statement.setLong(1, type);
+        ResultSet resultSet = statement.executeQuery();
         List<Object[]> resultList = new ArrayList<>();
         while (resultSet.next()) {
             resultList.add(new Object[]{resultSet.getString("name"), resultSet.getString("description"), resultSet.getInt("buyCount")});
