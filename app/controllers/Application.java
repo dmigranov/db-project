@@ -226,16 +226,23 @@ public class Application extends Controller {
         render(employees);
     }
 
+    static private String employeesError;
+
+
     public static void addEmployee(String firstName, String lastName, String phoneNumber, String email, int salary, double bonusPercent, String position)
     {
         System.out.println(firstName + " " + lastName + " " + phoneNumber + " " + email + " " + salary + " " + bonusPercent + " " + position);
 
         if("manager".equals(position) || "engineer".equals(position))
         {
-            if(!"".equals(firstName) && !"".equals(lastName)) {
-                Employee employee = new Employee(firstName, lastName, );
+            if(!"".equals(firstName) && !"".equals(lastName) && !"".equals(email) && !"".equals(phoneNumber)) {
+                Employee employee = new Employee(firstName, lastName, position, phoneNumber, email, salary, bonusPercent);
 
-                //todo
+                if (!validation.valid(employee).ok) {
+                    employeesError = "Impossible to add a detail!";
+                } else {
+                    employee.save();
+                }
             }
             else
             {
