@@ -239,7 +239,7 @@ public class Application extends Controller {
                 Employee employee = new Employee(firstName, lastName, position, phoneNumber, email, salary, bonusPercent);
 
                 if (!validation.valid(employee).ok) {
-                    employeesError = "Impossible to add a detail!";
+                    employeesError = "Impossible to add an employee!";
                 } else {
                     employee.save();
                 }
@@ -250,6 +250,7 @@ public class Application extends Controller {
             }
         }
 
+        //todo: передать ошибку в рендер
         getEmployees(null);
     }
 
