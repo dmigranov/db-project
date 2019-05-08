@@ -228,9 +228,21 @@ public class Application extends Controller {
 
     public static void addEmployee(String firstName, String lastName, String phoneNumber, String email, int salary, double bonusPercent, String position)
     {
-        //todo
-
         System.out.println(firstName + " " + lastName + " " + phoneNumber + " " + email + " " + salary + " " + bonusPercent + " " + position);
+
+        if("manager".equals(position) || "engineer".equals(position))
+        {
+            if(!"".equals(firstName) && !"".equals(lastName)) {
+                Employee employee = new Employee(firstName, lastName, );
+
+                //todo
+            }
+            else
+            {
+                //ашипка
+            }
+        }
+
         getEmployees(null);
     }
 
