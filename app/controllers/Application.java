@@ -13,6 +13,8 @@ import java.util.*;
 
 import models.*;
 
+import javax.persistence.EntityManager;
+
 public class Application extends Controller {
 
     public static void index() {
@@ -35,15 +37,13 @@ public class Application extends Controller {
 
         Connection conn = DB.getConnection();
         Statement statement = conn.createStatement();
-        boolean isResultSet = statement.execute("select t.name as t_name, trouble_count FROM Trouble t JOIN (select t.id as id, count(*) as trouble_count FROM Project p JOIN Trouble t ON p.trouble_id = t.id GROUP BY t.id) tc ON t.id = tc.id ORDER BY trouble_count DESC");
-        ResultSet resultSet = null;
+        ResultSet resultSet  = statement.executeQuery("select t.name as t_name, trouble_count FROM Trouble t JOIN (select t.id as id, count(*) as trouble_count FROM Project p JOIN Trouble t ON p.trouble_id = t.id GROUP BY t.id) tc ON t.id = tc.id ORDER BY trouble_count DESC");
+        //= null;
         List<Object[]> resultList = new ArrayList<>();
-        if (isResultSet) {
             resultSet = statement.getResultSet();
             while (resultSet.next()) {
                 resultList.add(new Object[]{resultSet.getString("t_name"), resultSet.getInt("trouble_count")});
             }
-        }
 
         render(resultList);
     }
@@ -120,6 +120,7 @@ public class Application extends Controller {
         List projects = Project.find(
                 "Select p, c.firstName, c.lastName FROM Project p JOIN Client c ON p.client = c  where p.engineer.id = ?1 or p.manager.id = ?1", id
         ).fetch();
+
 
         Employee employee = Employee.findById(id);
         List employees = Employee.findAll();
@@ -228,7 +229,7 @@ public class Application extends Controller {
     {
         //todo
 
-
+        System.out.println(firstName + " " + lastName + " " + phoneNumber + " " + email + " " + salary + " " + bonusPercent + " " + position);
         getEmployees(null);
     }
 
