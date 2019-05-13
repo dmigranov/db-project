@@ -215,8 +215,6 @@ public class Application extends Controller {
                 }
             } else
                 detailsError = "Impossible to add a detail! Please fill in fields!";
-
-            //todo: ЕСЛИ НЕ ВЫБРАТЬ ТИП, ЛОМАЕТСЯ!
         }
         Application.details();
     }
