@@ -221,8 +221,12 @@ public class Application extends Controller {
 
     public static void deleteDetail(long id) //если есть какие-то связи. Конечно, можно было бы включить cascade, но разумно ли удалять все заказы, в которых встречаются детали?
     {
-        Detail.delete("delete from Detail where id = ?1", id);
-
+        try {
+            Detail.delete("delete from Detail where id = ?1", id);
+        }
+        catch(PersistenceException e) {
+            detailsError = "Unable to delete a detail which is used in some projects. It should be preserved.";
+        }
         details();
     }
 
