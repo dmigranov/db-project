@@ -219,7 +219,7 @@ public class Application extends Controller {
         Application.details();
     }
 
-    public static void deleteDetail(long id)
+    public static void deleteDetail(long id) //если есть какие-то связи. Конечно, можно было бы включить cascade, но разумно ли удалять все заказы, в которых встречаются детали?
     {
         Detail.delete("delete from Detail where id = ?1", id);
 
@@ -268,7 +268,7 @@ public class Application extends Controller {
         try {
             Employee.delete("delete from Employee where id = ?1", id);
         }
-        catch(PersistenceException e)   //если есть какие-то связи. Конечно, можно было бы включить cascade, но разумно ли удалять все заказы, в которых встречаются детали?
+        catch(PersistenceException e)
         {
             Employee employee = Employee.findById(id);
             List<Project> projects = Project.find(
@@ -280,17 +280,16 @@ public class Application extends Controller {
             for(Project project : projects) {
                 Statement statement = conn.createStatement();
                 int c;
-                if ("manager".equals(employee.position)) {
-
+                if ("manager".equals(employee.position))
                     c = statement.executeUpdate("UPDATE Project SET manager_id = null WHERE manager_id = " + id);
-                } else {
+                else
                     c = statement.executeUpdate("UPDATE Project SET engineer_id = null WHERE engineer_id = " + id);
-                }
+                //statement.close();
             }
+
             Employee.delete("delete from Employee where id = ?1", id);
             employeesError = "Employee was deleted. All projects where they were involved were modified";
         }
-
         getEmployees(null);
     }
 
