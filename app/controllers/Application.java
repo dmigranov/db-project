@@ -158,9 +158,9 @@ public class Application extends Controller {
     }
 
     public static void popularDetails(long type) throws SQLException {
-        Connection conn = DB.getConnection();
         //Statement statement = conn.createStatement();
         //String query = "SELECT * FROM Detail d JOIN (Select d.id as d_id, sum(coalesce(o.count, 0)) as buyCount FROM Detail d /*LEFT*/ JOIN DetailOrder o ON o.detail_id = d.id WHERE d.type_id = " + type + " GROUP BY d.id) counts ON d.id = counts.d_id ORDER BY buyCount DESC";
+        Connection conn = DB.getConnection();
         String query = "SELECT * FROM Detail d JOIN (Select d.id as d_id, sum(coalesce(o.count, 0)) as buyCount FROM Detail d /*LEFT*/ JOIN DetailOrder o ON o.detail_id = d.id WHERE d.type_id = ? GROUP BY d.id) counts ON d.id = counts.d_id ORDER BY buyCount DESC";
         PreparedStatement statement = conn.prepareStatement(query);
         statement.setLong(1, type);
@@ -203,7 +203,7 @@ public class Application extends Controller {
     public static void addDetail(String name, String description, int cost, int count, long type) {
         DetailType detailType = DetailType.findById(type);
         if(detailType == null)
-            detailsError = "Please choose a deatil type!";
+            detailsError = "Please choose a detail type!";
         else {
             if (!"".equals(name) && !"".equals(description)) {
                 Detail detail = new Detail(detailType, cost, name, description, count);
@@ -274,12 +274,24 @@ public class Application extends Controller {
             List<Project> projects = Project.find(
                     "Select p FROM Project p where p.engineer.id = ?1 or p.manager.id = ?1", id
             ).fetch();
+            Connection conn = DB.getConnection();
+
 
             for(Project project : projects)
-                if("manager".equals(employee.position))
+                if("manager".equals(employee.position)) {
+                    Project.em().getTransaction().begin();
                     project.setManager(null);
-                else
+                    Project.em().getTransaction().commit();
+                }
+                else {
+                    Project.em().getTransaction().begin();
                     project.setEngineer(null);
+                    Project.em().getTransaction().commit();
+                    Project.
+                }
+
+            Employee.delete("delete from Employee where id = ?1", id);
+            employeesError = "Employee was deleted. All projects where they were involved were modified";
         }
 
         getEmployees(null);
