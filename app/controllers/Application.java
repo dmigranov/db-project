@@ -344,8 +344,20 @@ public class Application extends Controller {
         clients();
     }
 
-    public static void addClient()
+    public static void addClient(String firstName, String lastName, String phoneNumber, String email, boolean isPhysical)
     {
+        if(!"".equals(firstName) && !"".equals(lastName) && !"".equals(email) && !"".equals(phoneNumber)) {
+            Client client = new Client(firstName, lastName, phoneNumber, email, isPhysical);
+                if (!validation.valid(client).ok) {
+                    clientsError = "Impossible to add an employee! Check your input";
+                } else {
+                    client.save();
+                }
+            }
+        else
+            clientsError = "Please fill in fields!";
 
+
+        clients();
     }
 }
