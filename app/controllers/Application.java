@@ -292,11 +292,6 @@ public class Application extends Controller {
 
     public static void deleteEmployee(long id) throws SQLException
     {
-        /*try {
-            Employee.delete("delete from Employee where id = ?1", id);
-        }
-        catch(PersistenceException e)
-        {*/
         Employee employee = Employee.findById(id);
         if(employee == null)
             getEmployees(null);
@@ -310,12 +305,10 @@ public class Application extends Controller {
         else
             c = statement.executeUpdate("UPDATE Project SET engineer_id = null WHERE engineer_id = " + id);
 
-
         conn.commit();
         Employee.delete("delete from Employee where id = ?1", id);
         if(c > 0)
                 employeesError = "Employee was deleted. All projects where they were involved were modified";
-        //}
         getEmployees(null);
     }
 
