@@ -263,7 +263,7 @@ public class Application extends Controller {
         getEmployees(null);
     }
 
-    public static void deleteEmployee(long id)
+    public static void deleteEmployee(long id) throws SQLException
     {
         try {
             Employee.delete("delete from Employee where id = ?1", id);
@@ -275,21 +275,18 @@ public class Application extends Controller {
                     "Select p FROM Project p where p.engineer.id = ?1 or p.manager.id = ?1", id
             ).fetch();
             Connection conn = DB.getConnection();
+            conn.setAutoCommit(true);
 
+            for(Project project : projects) {
+                Statement statement = conn.createStatement();
+                int c;
+                if ("manager".equals(employee.position)) {
 
-            for(Project project : projects)
-                if("manager".equals(employee.position)) {
-                    Project.em().getTransaction().begin();
-                    project.setManager(null);
-                    Project.em().getTransaction().commit();
+                    c = statement.executeUpdate("UPDATE Project SET manager_id = null WHERE manager_id = " + id);
+                } else {
+                    c = statement.executeUpdate("UPDATE Project SET engineer_id = null WHERE engineer_id = " + id);
                 }
-                else {
-                    Project.em().getTransaction().begin();
-                    project.setEngineer(null);
-                    Project.em().getTransaction().commit();
-                    Project.
-                }
-
+            }
             Employee.delete("delete from Employee where id = ?1", id);
             employeesError = "Employee was deleted. All projects where they were involved were modified";
         }
