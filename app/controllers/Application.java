@@ -12,6 +12,7 @@ import java.util.Date;
 import models.*;
 
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceException;
 
 public class Application extends Controller {
 
@@ -192,7 +193,7 @@ public class Application extends Controller {
             while (resultSet.next()) {
                 resultList.add(new Object[]{resultSet.getString("name")});
             }
-        }*/ //это же неправильно (точнее, возвращает только бесструктурные имена), я объяснил
+        }*/
 
         String error = detailsError;
         detailsError = null;
@@ -216,6 +217,13 @@ public class Application extends Controller {
                 detailsError = "Impossible to add a detail! Please fill in fields!";
         }
         Application.details();
+    }
+
+    public static void deleteDetail(long id)
+    {
+        Detail.delete("delete from Detail where id = ?1", id);
+
+        details();
     }
 
     public static void getEmployees(String position)    //может, добавить сортировку (выбор только менеджеров/инженеров)?
@@ -257,7 +265,22 @@ public class Application extends Controller {
 
     public static void deleteEmployee(long id)
     {
-        Employee.delete("delete from Employee where id = ?1", id);
+        try {
+            Employee.delete("delete from Employee where id = ?1", id);
+        }
+        catch(PersistenceException e)   //если есть какие-то связи. Конечно, можно было бы включить cascade, но разумно ли удалять все заказы, в которых встречаются детали?
+        {
+            Employee employee = Employee.findById(id);
+            List<Project> projects = Project.find(
+                    "Select p FROM Project p where p.engineer.id = ?1 or p.manager.id = ?1", id
+            ).fetch();
+
+            for(Project project : projects)
+                if("manager".equals(employee.position))
+                    project.setManager(null);
+                else
+                    project.setEngineer(null);
+        }
 
         getEmployees(null);
     }

@@ -50,4 +50,14 @@ public class Project extends Model {
         this.troubleDescription = troubleDescription;
         this.type = type;
     }
+
+    public void setManager(Employee manager)
+    {
+        this.manager = manager;
+    }
+
+    public void setEngineer(Employee engineer)
+    {
+        this.engineer = engineer;
+    }
 }
