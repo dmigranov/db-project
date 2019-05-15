@@ -34,9 +34,13 @@ POST     /deleteDetail                          Application.deleteDetail
 
 #All projects
 GET      /allprojects                           Application.projects
-
 GET      /addproject                            Application.addProjectPage
 POST     /addproject                            Application.addProject
+
+#Clients
+GET      /clients                               Application.clients
+POST     /clients                               Application.addClient
+POST     /deleteClient                          Application.deleteClient
 
 
 # Ignore favicon requests
