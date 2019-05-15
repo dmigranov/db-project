@@ -113,23 +113,33 @@ public class Application extends Controller {
     }
 
     ///выводит список всех проектов, на которых задействован работник
-    public static void projectsOfEmployee(long id, Date startDate, Date endDate) {      //todo: дата
+    public static void projectsOfEmployee(long id, Date startDate, Date endDate) {
 
         List projects = null;
+        String addition = "";
+
+
         if(startDate == null && endDate == null) {
             projects = Project.find(
                     "Select p, c.firstName, c.lastName FROM Project p JOIN Client c ON p.client = c  where p.engineer.id = ?1 or p.manager.id = ?1", id
             ).fetch();
-
         }
         else
         {
-            String addition;
-            if(endDate != null)
-                addition = " and p.workBegin < " + endDate;
-            else if(startDate != null)
-                addition = " and p.workBegin > " + startDate;
-
+            if(startDate == null) {
+                projects = Project.find(
+                        "Select p, c.firstName, c.lastName FROM Project p JOIN Client c ON p.client = c  where p.engineer.id = ?1 or p.manager.id = ?1 and p.workBegin < ?2", id, endDate
+                ).fetch();
+            }
+            else if(endDate == null) {
+                projects = Project.find(
+                        "Select p, c.firstName, c.lastName FROM Project p JOIN Client c ON p.client = c  where p.engineer.id = ?1 or p.manager.id = ?1 and p.workBegin > ?2", id, startDate
+                ).fetch();
+            }
+            else
+                projects = Project.find(
+                        "Select p, c.firstName, c.lastName FROM Project p JOIN Client c ON p.client = c  where p.engineer.id = ?1 or p.manager.id = ?1 and p.workBegin > ?2 and p.workBegin < ?3", id, startDate, endDate
+                ).fetch();
 
         }
 
