@@ -202,19 +202,20 @@ public class Application extends Controller {
 
     public static void addDetail(String name, String description, int cost, int count, long type) {
         DetailType detailType = DetailType.findById(type);
+        if(detailType == null)
+            detailsError = "Please choose a deatil type!";
+        else {
+            if (!"".equals(name) && !"".equals(description)) {
+                Detail detail = new Detail(detailType, cost, name, description, count);
 
-        if(!"".equals(name) && !"".equals(description)) {
-            Detail detail = new Detail(detailType, cost, name, description, count);
-
-            if (!validation.valid(detail).ok) {
-                detailsError = "Impossible to add a detail!";
-            } else {
-                detail.save();
-            }
+                if (!validation.valid(detail).ok) {
+                    detailsError = "Impossible to add a detail!";
+                } else {
+                    detail.save();
+                }
+            } else
+                detailsError = "Impossible to add a detail! Please fill in fields!";
         }
-        else
-            detailsError = "Impossible to add a detail! Please fill in fields!";
-
         Application.details();
     }
 
