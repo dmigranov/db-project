@@ -303,7 +303,6 @@ public class Application extends Controller {
 
         Connection conn = DB.getConnection();
 
-
         Statement statement = conn.createStatement();
         int c;
         if ("manager".equals(employee.position))
@@ -333,25 +332,24 @@ public class Application extends Controller {
 
     public static void deleteClient(long id) throws SQLException
     {
-        try {
+        /*try {
             Client.delete("delete from Client where id = ?1", id);
         }
         catch(PersistenceException e)
-        {
+        {*/
 
             Connection conn = DB.getConnection();
-            conn.setAutoCommit(true);
-
 
             Statement statement = conn.createStatement();
             int c = statement.executeUpdate("UPDATE Project SET client_id = null WHERE client_id = " + id);
             statement.close();
 
-            conn.close();
+            conn.commit();
 
             Client.delete("delete from Client where id = ?1", id);
+        if(c > 0)
             clientsError = "Client was deleted. All projects where they were involved were modified";
-        }
+
         clients();
     }
 
