@@ -58,10 +58,10 @@ public class Application extends Controller {
         Trouble trouble = new Trouble("Some trouble").save();
         Trouble trouble2 = new Trouble("Another trouble").save();
 
-        new Project(ivan, engineer, manager, 10, 30, new Date(2019, 4, 14), new Date(2019, 4, 15), false, trouble,true).save();
-        new Project(ivan, engineer, manager, 20, 60, new Date(2019, 4, 14), new Date(2019, 4, 15), false, trouble,true).save();
-        new Project(ivan, engineer, manager, 345, 435, new Date(2019, 4, 12), new Date(2019, 4, 13), false, trouble2,true).save();*/
-
+        new Project(ivan, engineer, manager, 10, 30, new Date(2019, 4, 14), new Date(2019, 4, 15), false, trouble,null,true).save();
+        new Project(ivan, engineer, manager, 20, 60, new Date(2019, 4, 14), new Date(2019, 4, 15), false, trouble,null,true).save();
+        new Project(ivan, engineer, manager, 345, 435, new Date(2019, 4, 12), new Date(2019, 4, 13), false, trouble2,null, true).save();
+*/
         /*Client c = new Client("FSsf", "fdsfsdf", "79003431234", "vano@nsi.com", false);
         if(!validation.valid(c).ok)
         {
@@ -115,10 +115,23 @@ public class Application extends Controller {
     ///выводит список всех проектов, на которых задействован работник
     public static void projectsOfEmployee(long id, Date startDate, Date endDate) {      //todo: дата
 
-        List projects = Project.find(
-                "Select p, c.firstName, c.lastName FROM Project p JOIN Client c ON p.client = c  where p.engineer.id = ?1 or p.manager.id = ?1", id
-        ).fetch();
+        List projects = null;
+        if(startDate == null && endDate == null) {
+            projects = Project.find(
+                    "Select p, c.firstName, c.lastName FROM Project p JOIN Client c ON p.client = c  where p.engineer.id = ?1 or p.manager.id = ?1", id
+            ).fetch();
 
+        }
+        else
+        {
+            String addition;
+            if(endDate != null)
+                addition = " and p.workBegin < " + endDate;
+            else if(startDate != null)
+                addition = " and p.workBegin > " + startDate;
+
+
+        }
 
         Employee employee = Employee.findById(id);
         List employees = Employee.findAll();
