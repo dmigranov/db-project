@@ -30,6 +30,8 @@ GET      /projects                              Application.projectsOfEmployee  
 #Details
 GET      /details                               Application.details
 POST     /details                               Application.addDetail
+POST     /deleteDetail                          Application.deleteDetail
+
 #All projects
 GET      /allprojects                           Application.projects
 

@@ -26,7 +26,7 @@ ${error}
 <form method="post" action="deleteEmployee">
     <div class="form-group">
         <select name = 'id' class="form-control" id="exampleFormControlSelect1">
-            <option value = - selected1>---</option>
+            <option value = selected>---</option>
         #{list items:employees, as:'employeeIter'}
             <option value = ${employeeIter.id} >${employeeIter.firstName} ${employeeIter.lastName}</option>
         #{/list}
