@@ -292,32 +292,31 @@ public class Application extends Controller {
 
     public static void deleteEmployee(long id) throws SQLException
     {
-        try {
+        /*try {
             Employee.delete("delete from Employee where id = ?1", id);
         }
         catch(PersistenceException e)
-        {
-            Employee employee = Employee.findById(id);
-            List<Project> projects = Project.find(
-                    "Select p FROM Project p where p.engineer.id = ?1 or p.manager.id = ?1", id
-            ).fetch();
-            Connection conn = DB.getConnection();
-            conn.setAutoCommit(true);
+        {*/
+        Employee employee = Employee.findById(id);
+        if(employee == null)
+            getEmployees(null);
+
+        Connection conn = DB.getConnection();
 
 
-                Statement statement = conn.createStatement();
-                int c;
-                if ("manager".equals(employee.position))
-                    c = statement.executeUpdate("UPDATE Project SET manager_id = null WHERE manager_id = " + id);
-                else
-                    c = statement.executeUpdate("UPDATE Project SET engineer_id = null WHERE engineer_id = " + id);
-                //statement.close();
+        Statement statement = conn.createStatement();
+        int c;
+        if ("manager".equals(employee.position))
+            c = statement.executeUpdate("UPDATE Project SET manager_id = null WHERE manager_id = " + id);
+        else
+            c = statement.executeUpdate("UPDATE Project SET engineer_id = null WHERE engineer_id = " + id);
 
 
-            conn.close();
-            Employee.delete("delete from Employee where id = ?1", id);
-            employeesError = "Employee was deleted. All projects where they were involved were modified";
-        }
+        conn.commit();
+        Employee.delete("delete from Employee where id = ?1", id);
+        if(c > 0)
+                employeesError = "Employee was deleted. All projects where they were involved were modified";
+        //}
         getEmployees(null);
     }
 
