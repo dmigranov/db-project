@@ -320,5 +320,15 @@ public class Application extends Controller {
         getEmployees(null);
     }
 
+    static private String clientsError;
+
+    public static void clients()
+    {
+        List resultList = Client.findAll();
+
+        String error = clientsError;
+        clientsError = null;
+        render(resultList, error);
+    }
 
 }
