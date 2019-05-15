@@ -1,8 +1,11 @@
 package models;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import play.data.validation.Min;
 import play.db.jpa.Model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
@@ -10,13 +13,13 @@ import java.util.Date;
 
 @Entity
 public class Project extends Model {
-    @ManyToOne
+    @ManyToOne @OnDelete(action = OnDeleteAction.CASCADE)
     Client client;
 
-    @ManyToOne
+    @ManyToOne @OnDelete(action = OnDeleteAction.CASCADE)
     Employee engineer;
 
-    @ManyToOne
+    @ManyToOne @OnDelete(action = OnDeleteAction.CASCADE)
     Employee manager;
 
     @Min(0)long detailCost; //нужно ли хранить? можно же посчитаьт

@@ -64,7 +64,6 @@ public class Application extends Controller {
         /*Client c = new Client("FSsf", "fdsfsdf", "79003431234", "vano@nsi.com", false);
         if(!validation.valid(c).ok)
         {
-            //todo: методика я так понимаю такая
             System.out.println("hellloooo");
         }
         else
@@ -223,8 +222,10 @@ public class Application extends Controller {
     {
         List<Employee> employees = Employee.find("order by salary desc").fetch();
 
-
-        render(employees);
+        String error = employeesError;
+        System.out.println(error);
+        employeesError = null;
+        render(employees, error);
     }
 
     static private String employeesError;
@@ -246,12 +247,11 @@ public class Application extends Controller {
                 }
             }
             else
-            {
-                //ашипка
-            }
+                employeesError = "Please fill in fields!";
         }
+        else
+            employeesError = "Wrong position!";
 
-        //todo: передать ошибку в рендер
         getEmployees(null);
     }
 

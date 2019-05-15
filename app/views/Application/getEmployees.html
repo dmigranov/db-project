@@ -16,6 +16,12 @@
 <body>
 <h1>Employees management</h1>
 
+#{if error}
+<div class="alert alert-primary" role="alert">
+${error}
+</div>
+#{/if}
+
 <h3>Want to remove an employee?</h3>
 <form method="post" action="deleteEmployee">
     <div class="form-group">
