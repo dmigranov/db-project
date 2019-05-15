@@ -48,7 +48,7 @@ public class Application extends Controller {
     }
 
     public void fillDB() {
-        /*Client ivan = new Client("Ivan", "Ivanov", "89003431234", "vano@google.com", false).save();
+        Client ivan = new Client("Ivan", "Ivanov", "89003431234", "vano@google.com", false).save();
         new Client("FSfds", "fdsfds", "89003431234", "vdsgle.com", false).save();
 
         Employee manager = new Employee("Petr", "Petrov", "manager", "89003431234", "vano@google.com", 40000, 0.05).save();
@@ -61,7 +61,7 @@ public class Application extends Controller {
         new Project(ivan, engineer, manager, 10, 30, new Date(2019, 4, 14), new Date(2019, 4, 15), false, trouble,null,true).save();
         new Project(ivan, engineer, manager, 20, 60, new Date(2019, 4, 14), new Date(2019, 4, 15), false, trouble,null,true).save();
         new Project(ivan, engineer, manager, 345, 435, new Date(2019, 4, 12), new Date(2019, 4, 13), false, trouble2,null, true).save();
-*/
+
         /*Client c = new Client("FSsf", "fdsfsdf", "79003431234", "vano@nsi.com", false);
         if(!validation.valid(c).ok)
         {
@@ -156,13 +156,13 @@ public class Application extends Controller {
         String order = (desc == 1 ? " desc" : " asc");
         if(sortType == 0) {     //по стоимости
             projects = Project.find(
-                    "Select p, c.firstName, c.lastName, (detailCost + workCost) as cost FROM Project p JOIN Client c ON p.client = c ORDER BY cost" + order
+                    "Select p, c.firstName, c.lastName, (detailCost + workCost) as cost FROM Project p LEFT JOIN Client c ON p.client = c ORDER BY cost" + order
             ).fetch();
         }
         else
         {
             projects = Project.find(
-                    "Select p, c.firstName, c.lastName, (detailCost + workCost) as cost FROM Project p JOIN Client c ON p.client = c ORDER BY type" + order
+                    "Select p, c.firstName, c.lastName, (detailCost + workCost) as cost FROM Project p LEFT JOIN Client c ON p.client = c ORDER BY type" + order
             ).fetch();
         }
 
@@ -304,7 +304,7 @@ public class Application extends Controller {
             Connection conn = DB.getConnection();
             conn.setAutoCommit(true);
 
-            for(Project project : projects) {
+
                 Statement statement = conn.createStatement();
                 int c;
                 if ("manager".equals(employee.position))
@@ -312,8 +312,9 @@ public class Application extends Controller {
                 else
                     c = statement.executeUpdate("UPDATE Project SET engineer_id = null WHERE engineer_id = " + id);
                 //statement.close();
-            }
 
+
+            conn.close();
             Employee.delete("delete from Employee where id = ?1", id);
             employeesError = "Employee was deleted. All projects where they were involved were modified";
         }
@@ -329,6 +330,30 @@ public class Application extends Controller {
         String error = clientsError;
         clientsError = null;
         render(resultList, error);
+    }
+
+    public static void deleteClient(long id) throws SQLException
+    {
+        try {
+            Client.delete("delete from Client where id = ?1", id);
+        }
+        catch(PersistenceException e)
+        {
+
+            Connection conn = DB.getConnection();
+            conn.setAutoCommit(true);
+
+
+            Statement statement = conn.createStatement();
+            int c = statement.executeUpdate("UPDATE Project SET client_id = null WHERE client_id = " + id);
+            statement.close();
+
+            conn.close();
+
+            Client.delete("delete from Client where id = ?1", id);
+            clientsError = "Client was deleted. All projects where they were involved were modified";
+        }
+        clients();
     }
 
 }

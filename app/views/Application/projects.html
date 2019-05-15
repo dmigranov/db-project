@@ -63,7 +63,13 @@
                 #{else }
                     <td>Repair</td>
                 #{/else}
-                <td>${project[1]} ${project[2]}</td>
+
+                #{if project[2]}
+                    <td>${project[1]} ${project[2]}</td>
+                #{/if}
+                #{else }
+                    <td>Client is deleted</td>
+                #{/else}
 
 
             </tr>

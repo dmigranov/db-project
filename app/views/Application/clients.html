@@ -28,7 +28,7 @@ ${error}
         <select name = 'id' class="form-control" id="exampleFormControlSelect1">
             <option value = selected>---</option>
         #{list items:resultList, as:'clientIter'}
-            <option value = ${clientIter.id} >${clientIter.firstName} | ${clientIter.lastName}</option>
+            <option value = ${clientIter.id} >${clientIter.firstName} ${clientIter.lastName}</option>
         #{/list}
         </select>
     </div>
