@@ -39,17 +39,16 @@ ${error}
     </div>
 </form>
 
-<h3>Want to add a detail?</h3>
+<h3>Want to add a client?</h3>
 <form method="post">
     <div class="form-group">
-        <input type="text" class="form-control" id="exampleFormControlInput1" name = 'name' placeholder="Name">
-        <input type="text" class="form-control" id="exampleFormControlInput2" name = 'description' placeholder="Description">
-        <input type="text" class="form-control" id="exampleFormControlInput3" name = 'cost' placeholder="Cost">
-        <input type="text" class="form-control" id="exampleFormControlInput4" name = 'count' placeholder="Count">
-        <select name = 'type' class="form-control" id="exampleFormControlSelect1">
-        #{list items:types, as:'type'}
-            <option value = ${type.id} >${type.name}</option>
-        #{/list}
+        <input type="text" class="form-control" id="exampleFormControlInput1" name = 'firstName' placeholder="First name">
+        <input type="text" class="form-control" id="exampleFormControlInput5" name = 'lastName' placeholder="Last name">
+        <input type="text" class="form-control" id="exampleFormControlInput2" name = 'phoneNumber' placeholder="Phone number">
+        <input type="text" class="form-control" id="exampleFormControlInput3" name = 'email' placeholder="E-mail">
+        <select name = 'isPhysical' class="form-control" id="exampleFormControlSelect1">
+            <option value = true>Physical</option>
+            <option value = false>Legal</option>
         </select>
     </div>
     <div class="form-group">

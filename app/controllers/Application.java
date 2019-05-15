@@ -268,8 +268,6 @@ public class Application extends Controller {
 
     public static void addEmployee(String firstName, String lastName, String phoneNumber, String email, int salary, double bonusPercent, String position)
     {
-        System.out.println(firstName + " " + lastName + " " + phoneNumber + " " + email + " " + salary + " " + bonusPercent + " " + position);
-
         if("manager".equals(position) || "engineer".equals(position))
         {
             if(!"".equals(firstName) && !"".equals(lastName) && !"".equals(email) && !"".equals(phoneNumber)) {
@@ -346,4 +344,8 @@ public class Application extends Controller {
         clients();
     }
 
+    public static void addClient()
+    {
+
+    }
 }
