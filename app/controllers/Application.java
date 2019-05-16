@@ -360,4 +360,10 @@ public class Application extends Controller {
 
         clients();
     }
+
+    public static void findGuaranteedProjects()
+    {
+        List projects = Project.find("Select p from Project p where isGuaranteed = true").fetch();
+        render(projects);
+    }
 }
