@@ -385,12 +385,12 @@ public class Application extends Controller {
         //List resultList = Client.find("Select c.id, count(*), sum(p.workCost)  from Client c JOIN Project p ON p.client = c group by c.id").fetch();
 
         Connection conn = DB.getConnection();
-        String query = "SELECT * FROM Client c JOIN (Select c.id as c_id, count(*) as p_count, sum(p.workCost), sum(detailCost) from Client c JOIN Project p ON p.client_id = c.id group by c.id) counts ON c.id = counts.c_id";
+        String query = "SELECT * FROM Client c JOIN (Select c.id as c_id, count(*) as p_count, sum(p.workCost) as workSum, sum(detailCost) as detailSum from Client c JOIN Project p ON p.client_id = c.id group by c.id) counts ON c.id = counts.c_id";
         PreparedStatement statement = conn.prepareStatement(query);
         ResultSet resultSet = statement.executeQuery();
         List<Object[]> resultList = new ArrayList<>();
         while (resultSet.next()) {
-            resultList.add(new Object[]{resultSet.getString("firstName"), resultSet.getString("lastName") ,resultSet.getString("p_count")});
+            resultList.add(new Object[]{resultSet.getString("firstName"), resultSet.getString("lastName") ,resultSet.getString("p_count"), resultSet.getLong("workSum") + resultSet.getLong("detailSum")  });
         }
 
         render(resultList);

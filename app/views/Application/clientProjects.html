@@ -12,7 +12,7 @@
 </head>
 
 #{extends 'main.html' /}
-#{set title:'Clients & projects' /}
+#{set title:'Clients & Projects' /}
 
 <body>
 <h1>Clients & projects</h1>
@@ -25,9 +25,9 @@
         <tr>
             <th scope="col">First name</th>
             <th scope="col">Last name</th>
-            <th scope="col">Number</th>
-            <th scope="col">E-mail</th>
-            <th scope="col">Is physical</th>
+            <th scope="col">Project count</th>
+            <th scope="col">Sum</th>
+
 
         </tr>
         </thead>
@@ -39,7 +39,7 @@
                 <td>${client[0]}</td>
                 <td>${client[1]}</td>
                 <td>${client[2]}</td>
-
+                <td>${client[3]}</td>
 
             </tr>
             #{/list}
