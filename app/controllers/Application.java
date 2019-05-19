@@ -191,13 +191,13 @@ public class Application extends Controller {
         Trouble trouble = Trouble.findById(trouble_id);
 
         boolean success = false;
-
+        Project p = null;
         if(manager == null || engineer == null || client == null || trouble == null)
             projectsError = "Oops...";
         else {
             if (workBegin != null)
             {
-                Project p = new Project(client, engineer, manager,  0, workCost, workBegin, workEnd, isGuaranteed, trouble, description, type);
+                p = new Project(client, engineer, manager,  0, workCost, workBegin, workEnd, isGuaranteed, trouble, description, type);
                 if (!validation.valid(p).ok) {
                     projectsError = "Impossible to add such a project!";
                 } else {
@@ -211,12 +211,12 @@ public class Application extends Controller {
             }
         }
         if(success)
-            Application.addProjectPage();
+            Application.addProjectPage(p.id);
         else
             Application.projects(0, 0);
     }
 
-    public static void addProjectPage()
+    public static void addProjectPage(long id)
     {
         //Project p = new Project();
         render();
