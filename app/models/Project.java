@@ -22,7 +22,7 @@ public class Project extends Model {
     Employee manager;
 
     @Min(0)long detailCost; //нужно ли хранить? можно же посчитаьт
-    @Min(0)int workCost;
+    @Min(1)int workCost;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "project", orphanRemoval = true)
     List<DetailOrder> detailOrders = new ArrayList<>();

@@ -18,9 +18,8 @@
 <h2>Adding a new order for this project:</h2>
 <form method="post">
     <div class="form-group">
-        <input type="text" class="form-control" id="exampleFormControlInput1" name = 'workCost' placeholder="Work Cost">
-        <input type="date" class="form-control" id="exampleFormControlInput2" name = 'workBegin' placeholder="Work Begin">
-        <input type="date" class="form-control" id="exampleFormControlInput3" name = 'workEnd' placeholder="Work End">
+        <input type="text" class="form-control" id="exampleFormControlInput1" name = 'count' placeholder="Detail count">
+
         <!--
         <input type="text" class="form-control" id="exampleFormControlInput4" name = 'count' placeholder="Count">
 
@@ -33,7 +32,7 @@
     </div>
     <div class="form-group">
         <div class="col-sm-offset-2 col-sm-10">
-            <button type="submit" class="btn btn-default">Добавить</button>
+            <button type="submit" class="btn btn-dark">Добавить</button>
         </div>
     </div>
 </form>
@@ -42,6 +41,10 @@
 <h4>Client: #{if project.client}${project.client.firstName} ${project.client.lastName}#{/if}  #{else }Deleted Client#{/else}</h4>
 <h4>Manager: #{if project.manager}${project.manager.firstName} ${project.manager.lastName}#{/if}  #{else }Deleted Manager#{/else}</h4>
 <h4>Engineer: #{if project.engineer}${project.engineer.firstName} ${project.engineer.lastName}#{/if}  #{else }Deleted Engineer#{/else}</h4>
+<h4>Start date: ${project.workBegin}</h4>
+<h4>End date: #{if project.workEnd}${project.workEnd}#{/if} #{else }Not finished#{/else}</h4>
+<h4>Work cost: ${project.workCost}</h4>
+
 
 
 <!-- Optional JavaScript -->
