@@ -152,6 +152,8 @@ public class Application extends Controller {
         render(projects, employee, employees);
     }
 
+
+
     ///выводит список всех проектов и сортирует их
     public static void projects(int sortType, int desc) {   //sortType = 0 - по сумме стимостей, 2 - по типу; desc = 0 - asc, desc = 1 = desc
         //todo: по идее, стоимость деталей является избыточной, её нужно получать как сумму из DetailOrder'ов!
@@ -177,6 +179,7 @@ public class Application extends Controller {
         render(projects, clients, engineers, managers, troubles);
     }
 
+    private static String projectsError = null;
     public static void addProject(int workCost, Date workBegin, Date workEnd, boolean isGuaranteed, long client_id, long manager_id, long engineer_id, long trouble_id, String description, boolean type)
     {
         Employee manager = Employee.findById(manager_id);
@@ -184,9 +187,30 @@ public class Application extends Controller {
         Client client = Client.findById(client_id);
         Trouble trouble = Trouble.findById(trouble_id);
 
+        boolean success = false;
 
-        Project p = new Project(client, engineer, manager,  0, workCost, workBegin, workEnd, isGuaranteed, trouble, description, type);
-        Application.addProjectPage();
+        if(manager == null || engineer == null || client == null || trouble == null)
+            projectsError = "Oops...";
+        else {
+            if (workBegin != null)
+            {
+                Project p = new Project(client, engineer, manager,  0, workCost, workBegin, workEnd, isGuaranteed, trouble, description, type);
+                if (!validation.valid(p).ok) {
+                    projectsError = "Impossible to add such a project!";
+                } else {
+                    p.save();
+                    success = true;
+                }
+            }
+            else
+            {
+                projectsError = "Please fill in start date...";
+            }
+        }
+        if(success)
+            Application.addProjectPage();
+        else
+            Application.projects(0, 0);
     }
 
     public static void addProjectPage()
