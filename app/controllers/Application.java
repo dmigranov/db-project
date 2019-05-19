@@ -5,9 +5,11 @@ import play.data.validation.Valid;
 import play.db.DB;
 import play.mvc.*;
 
+import java.awt.*;
 import java.sql.*;
 import java.util.*;
 import java.util.Date;
+import java.util.List;
 
 import models.*;
 
@@ -166,17 +168,23 @@ public class Application extends Controller {
             ).fetch();
         }
 
-        render(projects);
+        List<Client> clients = Client.findAll();
+        List<Employee> managers = Employee.find("select e from Employee e where e.position = 'manager'").fetch();
+        List<Employee> engineers = Employee.find("select e from Employee e where e.position = 'engineer'").fetch();
+        List<Trouble> troubles = Trouble.findAll();
+
+        render(projects, clients, engineers, managers, troubles);
     }
 
-    public static void addProject()
+    public static void addProject(int workCost, Date workBegin, Date workEnd, boolean isGuaranteed)
     {
+        //Project p = new Project();
         Application.addProjectPage();
     }
 
     public static void addProjectPage()
     {
-        //todo: в добавлении проекта надо как-то выбирать много деталей со склада... потом суммировать их стоимость!
+        //Project p = new Project();
         render();
     }
 
@@ -382,8 +390,6 @@ public class Application extends Controller {
 
     public static void clientProjects() throws SQLException
     {
-        //List resultList = Client.find("Select c.id, count(*), sum(p.workCost)  from Client c JOIN Project p ON p.client = c group by c.id").fetch();
-
         Connection conn = DB.getConnection();
         String query = "SELECT * FROM Client c JOIN (Select c.id as c_id, count(*) as p_count, sum(p.workCost) as workSum, sum(detailCost) as detailSum from Client c JOIN Project p ON p.client_id = c.id group by c.id) counts ON c.id = counts.c_id";
         PreparedStatement statement = conn.prepareStatement(query);
