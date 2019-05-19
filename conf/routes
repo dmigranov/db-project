@@ -44,6 +44,8 @@ POST     /deleteClient                          Application.deleteClient
 
 GET      /guaranteed                            Application.findGuaranteedProjects
 
+GET      /clientProjects                        Application.clientProjects
+
 # Ignore favicon requests
 GET     /favicon.ico                            404
 

@@ -366,4 +366,13 @@ public class Application extends Controller {
         List projects = Project.find("Select p from Project p where isGuaranteed = true").fetch();
         render(projects);
     }
+
+    public static void clientProjects()
+    {
+        List resultList = Client.find("Select c.id, count(*)  from Client c JOIN Project p ON p.client = c group by c.id").fetch();
+
+        String error = clientsError;
+        clientsError = null;
+        render(resultList, error);
+    }
 }
