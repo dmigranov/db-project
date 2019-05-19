@@ -12,6 +12,14 @@
 #{extends 'main.html' /}
 #{set title:'All projects' /}
 <body>
+
+#{if error}
+<div class="alert alert-primary" role="alert">
+${error}
+</div>
+#{/if}
+
+
 <h1>All projects</h1>
 
 <h3>Want to add a project?</h3>

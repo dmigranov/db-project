@@ -176,7 +176,10 @@ public class Application extends Controller {
         List<Employee> engineers = Employee.find("select e from Employee e where e.position = 'engineer'").fetch();
         List<Trouble> troubles = Trouble.findAll();
 
-        render(projects, clients, engineers, managers, troubles);
+        String error = projectsError;
+        projectsError = null;
+
+        render(projects, clients, engineers, managers, troubles, error);
     }
 
     private static String projectsError = null;
