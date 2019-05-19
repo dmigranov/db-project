@@ -182,13 +182,13 @@ public class Application extends Controller {
 
     public static void deleteProject(long id)
     {
-
+        try{
             Project.delete("delete from Project where id = ?1", id);
-        /*}
+        }
         catch(PersistenceException e)
         {
             //todo
-        }*/
+        }
 
         projects(0, 0);
     }
@@ -380,12 +380,19 @@ public class Application extends Controller {
         render(projects);
     }
 
-    public static void clientProjects()
+    public static void clientProjects() throws SQLException
     {
-        List resultList = Client.find("Select c.id, count(*), sum(p.workCost)  from Client c JOIN Project p ON p.client = c group by c.id").fetch();
+        //List resultList = Client.find("Select c.id, count(*), sum(p.workCost)  from Client c JOIN Project p ON p.client = c group by c.id").fetch();
 
-        String error = clientsError;
-        clientsError = null;
-        render(resultList, error);
+        Connection conn = DB.getConnection();
+        String query = "SELECT * FROM Client c JOIN (Select c.id as c_id, count(*) as p_count, sum(p.workCost), sum(detailCost) from Client c JOIN Project p ON p.client_id = c.id group by c.id) counts ON c.id = counts.c_id";
+        PreparedStatement statement = conn.prepareStatement(query);
+        ResultSet resultSet = statement.executeQuery();
+        List<Object[]> resultList = new ArrayList<>();
+        while (resultSet.next()) {
+            resultList.add(new Object[]{resultSet.getString("firstName"), resultSet.getString("lastName") ,resultSet.getString("p_count")});
+        }
+
+        render(resultList);
     }
 }
