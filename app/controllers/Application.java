@@ -180,6 +180,19 @@ public class Application extends Controller {
         render();
     }
 
+    public static void deleteProject(long id)
+    {
+
+            Project.delete("delete from Project where id = ?1", id);
+        /*}
+        catch(PersistenceException e)
+        {
+            //todo
+        }*/
+
+        projects(0, 0);
+    }
+
     public static void popularDetails(long type) throws SQLException {
         //Statement statement = conn.createStatement();
         //String query = "SELECT * FROM Detail d JOIN (Select d.id as d_id, sum(coalesce(o.count, 0)) as buyCount FROM Detail d /*LEFT*/ JOIN DetailOrder o ON o.detail_id = d.id WHERE d.type_id = " + type + " GROUP BY d.id) counts ON d.id = counts.d_id ORDER BY buyCount DESC";
@@ -369,7 +382,7 @@ public class Application extends Controller {
 
     public static void clientProjects()
     {
-        List resultList = Client.find("Select c.id, count(*)  from Client c JOIN Project p ON p.client = c group by c.id").fetch();
+        List resultList = Client.find("Select c.id, count(*), sum(p.workCost)  from Client c JOIN Project p ON p.client = c group by c.id").fetch();
 
         String error = clientsError;
         clientsError = null;

@@ -36,6 +36,7 @@ POST     /deleteDetail                          Application.deleteDetail
 GET      /allprojects                           Application.projects
 GET      /addproject                            Application.addProjectPage
 POST     /addproject                            Application.addProject
+POST     /deleteProject                         Application.deleteProject
 
 #Clients
 GET      /clients                               Application.clients

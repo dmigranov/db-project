@@ -5,11 +5,10 @@ import org.hibernate.annotations.OnDeleteAction;
 import play.data.validation.Min;
 import play.db.jpa.Model;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 public class Project extends Model {
@@ -24,6 +23,9 @@ public class Project extends Model {
 
     @Min(0)long detailCost; //нужно ли хранить? можно же посчитаьт
     @Min(0)int workCost;
+
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "project", orphanRemoval = true)
+    List<DetailOrder> detailOrders = new ArrayList<>();
 
     Date workBegin;
     Date workEnd;
