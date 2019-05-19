@@ -218,8 +218,12 @@ public class Application extends Controller {
 
     public static void addProjectPage(long id)
     {
-        //Project p = new Project();
-        render();
+        Project project = Project.findById(id);
+        if(project == null)
+            projects(0, 0);
+        else {
+            render(project);
+        }
     }
 
     public static void deleteProject(long id)
