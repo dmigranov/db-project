@@ -1,5 +1,6 @@
 package controllers;
 
+import oracle.ons.Cli;
 import play.*;
 import play.data.validation.Valid;
 import play.db.DB;
@@ -176,9 +177,15 @@ public class Application extends Controller {
         render(projects, clients, engineers, managers, troubles);
     }
 
-    public static void addProject(int workCost, Date workBegin, Date workEnd, boolean isGuaranteed)
+    public static void addProject(int workCost, Date workBegin, Date workEnd, boolean isGuaranteed, long client_id, long manager_id, long engineer_id, long trouble_id, String description, boolean type)
     {
-        //Project p = new Project();
+        Employee manager = Employee.findById(manager_id);
+        Employee engineer = Employee.findById(engineer_id);
+        Client client = Client.findById(client_id);
+        Trouble trouble = Trouble.findById(trouble_id);
+
+
+        Project p = new Project(client, engineer, manager,  0, workCost, workBegin, workEnd, isGuaranteed, trouble, description, type);
         Application.addProjectPage();
     }
 

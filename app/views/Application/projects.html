@@ -26,7 +26,7 @@
             <option value = false>Is not guaranteed</option>
         </select>
 
-        <label for="exampleFormControlSelect2">Trouble</label><select name = 'trouble_id' class="form-control" id="exampleFormControlSelect2">
+        <label for="exampleFormControlSelect2">Trouble:</label><select name = 'trouble_id' class="form-control" id="exampleFormControlSelect2">
         #{list items:troubles, as:'trouble'}
             <option value = ${trouble.id} >${trouble.name}</option>
         #{/list}
@@ -34,22 +34,27 @@
 
         <input type="text" class="form-control" id="exampleFormControlInput4" name = 'description' placeholder="trouble description">
 
-        <label for="exampleFormControlSelect3">Client</label><select name = 'client_id' class="form-control" id="exampleFormControlSelect3">
+        <label for="exampleFormControlSelect3">Client:</label><select name = 'client_id' class="form-control" id="exampleFormControlSelect3">
         #{list items:clients, as:'client'}
             <option value = ${client.id} >${client.firstName} ${client.lastName}</option>
         #{/list}
         </select>
 
-        <label for="exampleFormControlSelect4">Manager</label><select name = 'manager_id' class="form-control" id="exampleFormControlSelect4">
+        <label for="exampleFormControlSelect4">Manager:</label><select name = 'manager_id' class="form-control" id="exampleFormControlSelect4">
         #{list items:managers, as:'manager'}
             <option value = ${manager.id} >${manager.firstName} ${manager.lastName}</option>
         #{/list}
         </select>
 
-        <label for="exampleFormControlSelect5">Engineer</label><select name = 'engineer_id' class="form-control" id="exampleFormControlSelect5">
+        <label for="exampleFormControlSelect5">Engineer:</label><select name = 'engineer_id' class="form-control" id="exampleFormControlSelect5">
         #{list items:engineers, as:'engineer'}
             <option value = ${engineer.id} >${engineer.firstName} ${engineer.lastName}</option>
         #{/list}
+        </select>
+
+        <label for="exampleFormControlSelect6">Type:</label><select name = 'type' class="form-control" id="exampleFormControlSelect6">
+            <option value = false>Building</option>
+            <option value = true>Fixing</option>
         </select>
 
 
