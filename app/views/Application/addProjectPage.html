@@ -10,12 +10,12 @@
 </head>
 
 #{extends 'main.html' /}
-#{set title:'Project № ${project.id}' /}
+#{set title:'Project page' /}
 <body>
 <h1>Project № ${project.id}</h1>
 
 
-<h2>Adding a new order for this project</h2>
+<h2>Adding a new order for this project:</h2>
 <form method="post">
     <div class="form-group">
         <input type="text" class="form-control" id="exampleFormControlInput1" name = 'workCost' placeholder="Work Cost">
@@ -37,6 +37,11 @@
         </div>
     </div>
 </form>
+
+<h2>Project info:</h2>
+<h4>Client: #{if project.client}${project.client.firstName} ${project.client.lastName}#{/if}  #{else }Deleted Client#{/else}</h4>
+<h4>Manager: #{if project.manager}${project.manager.firstName} ${project.manager.lastName}#{/if}  #{else }Deleted Manager#{/else}</h4>
+<h4>Engineer: #{if project.engineer}${project.engineer.firstName} ${project.engineer.lastName}#{/if}  #{else }Deleted Engineer#{/else}</h4>
 
 
 <!-- Optional JavaScript -->
