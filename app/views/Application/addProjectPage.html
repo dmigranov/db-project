@@ -55,6 +55,14 @@ ${error}
 <h4>Start date: ${project.workBegin}</h4>
 <h4>End date: #{if project.workEnd}${project.workEnd}#{/if} #{else }Not finished#{/else}</h4>
 <h4>Work cost: ${project.workCost}</h4>
+<h6>Description:
+#{if project.troubleDescription}
+    ${project.troubleDescription}
+#{/if}
+#{else }
+    ---
+#{/else}
+</h6>
 
 <hr>
 
