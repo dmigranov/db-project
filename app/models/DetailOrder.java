@@ -8,12 +8,12 @@ import play.db.jpa.Model;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotNull;
 
 @Entity
 public class DetailOrder extends Model {
     @ManyToOne
     @JoinColumn(name = "project_id")
-
     public Project project;
     @ManyToOne
     public Detail detail;

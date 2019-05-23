@@ -215,18 +215,37 @@ public class Application extends Controller {
             }
         }
         if(success)
-            Application.addProjectPage(p.id);
+            Application.addProjectPage(p.id, 0);
         else
             Application.projects(0, 0);
+    }
+
+    static String orderError = null;
+    public static void addOrder(long id, long detail_id , int count)
+    {
+        //System.out.println(detail_id);
+        Project project = Project.findById(id);
+        Detail detail = Detail.findById(detail_id);
+        if(project != null && detail != null) {
+            DetailOrder order = new DetailOrder(project, detail, count);
+            if (!validation.valid(order).ok) {
+                orderError = "Impossible to add such an order!";
+            } else {
+                detail.save();
+            }
+        }
+
+
     }
 
     public static void addProjectPage(long id)
     {
         Project project = Project.findById(id);
+        List details = Detail.findAll();
         if(project == null)
             projects(0, 0);
         else {
-            render(project);
+            render(project, details);
         }
     }
 
