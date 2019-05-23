@@ -59,6 +59,28 @@ ${error}
 <hr>
 
 <h2>Detail orders:</h2>
+<table class="table">
+    <thead>
+    <tr>
+        <th scope="col">Detail</th>
+        <th scope="col">Description</th>
+        <th scope="col">Count</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    #{if orders}
+        #{list items:orders, as:'order'}
+        <tr>
+            <td>${order.detail.name}</td>
+            <td>${order.detail.description}</td>
+            <td>${order.count}</td>
+        </tr>
+        #{/list}
+    #{/if}
+    </tbody>
+</table>
+
 
 
 
