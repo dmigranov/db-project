@@ -197,13 +197,17 @@ public class Application extends Controller {
         else {
             if (workBegin != null)
             {
-                p = new Project(client, engineer, manager,  0, workCost, workBegin, workEnd, isGuaranteed, trouble, description, type);
-                if (!validation.valid(p).ok) {
-                    projectsError = "Impossible to add such a project!";
-                } else {
-                    p.save();
-                    success = true;
+                if(workEnd == null || (workEnd != null && workBegin.before(workEnd))) {
+                    p = new Project(client, engineer, manager, 0, workCost, workBegin, workEnd, isGuaranteed, trouble, description, type);
+                    if (!validation.valid(p).ok) {
+                        projectsError = "Impossible to add such a project!";
+                    } else {
+                        p.save();
+                        success = true;
+                    }
                 }
+                else
+                    projectsError = "Wrong end date!";
             }
             else
             {
