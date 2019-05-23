@@ -65,6 +65,9 @@ ${error}
         <th scope="col">Detail</th>
         <th scope="col">Description</th>
         <th scope="col">Count</th>
+        <th scope="col">Detail cost</th>
+        <th scope="col">Sum</th>
+
     </tr>
     </thead>
 
@@ -75,6 +78,9 @@ ${error}
             <td>${order.detail.name}</td>
             <td>${order.detail.description}</td>
             <td>${order.count}</td>
+            <td>${order.detail.cost}</td>
+            <td>${order.detail.cost * order.count}</td>
+
         </tr>
         #{/list}
     #{/if}
