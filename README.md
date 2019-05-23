@@ -51,3 +51,25 @@ __Мигранов:__
 * Добавление (при попытке добавить что-то плохое - уведомление) и удаление деталей со склада (при попытке удалить деталь, использующуюся в каких=то проектах, будет выдано уведомление о невозможности этого)
 * Добавление (при попытке добавить что-то плохое - уведомление) и удаление клиентов (в том числе можно удалять и тех, кто указан в каких-либо проектах; информация о проектах сохранится, но о клиентах - будет ожидаемо из них удалена)
 * Начат интерфейс для добавления проектов.
+
+
+Чтобы добавление заказов на детали работало корректно (т.е. чтобы при добавлении заказа детали изымались со склада и нельзя было добавить несуществующее число деталей) нужно вручную добавить в базу триггер:
+
+'''
+
+CREATE OR REPLACE TRIGGER detail_orders_insert_trigger BEFORE INSERT ON DetailOrder
+FOR EACH ROW
+DECLARE
+    detail_count Detail.count%TYPE;
+    not_enough_details EXCEPTION;
+BEGIN
+    SELECT count INTO detail_count FROM Detail WHERE id = :new.detail_id;
+    
+    IF detail_count < :NEW.count THEN
+        RAISE not_enough_details;
+    END IF;
+    
+    UPDATE Detail SET Detail.count = detail_count - :NEW.count WHERE id = :new.detail_id;
+END;
+
+'''
