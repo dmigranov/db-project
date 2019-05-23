@@ -116,7 +116,7 @@ ${error}
 
             #{list items:projects, as:'project'}
             <tr>
-                <td>${project[0].id}</td>
+                <td><a href=/allprojects/${project[0].id}>${project[0].id}</a></td>
                 <td>${project[0].detailCost}</td>
                 <td>${project[0].workCost}</td>
                 <td>${project[3]}</td>
