@@ -55,14 +55,13 @@ __Мигранов:__
 
 Чтобы добавление заказов на детали работало корректно (т.е. чтобы при добавлении заказа детали изымались со склада и нельзя было добавить несуществующее число деталей) нужно вручную добавить в базу триггер:
 
-'''
-
-CREATE OR REPLACE TRIGGER detail_orders_insert_trigger BEFORE INSERT ON DetailOrder
-FOR EACH ROW
-DECLARE
+    SQL
+    CREATE OR REPLACE TRIGGER detail_orders_insert_trigger BEFORE INSERT ON DetailOrder
+    FOR EACH ROW
+    DECLARE
     detail_count Detail.count%TYPE;
     not_enough_details EXCEPTION;
-BEGIN
+    BEGIN
     SELECT count INTO detail_count FROM Detail WHERE id = :new.detail_id;
     
     IF detail_count < :NEW.count THEN
@@ -70,6 +69,5 @@ BEGIN
     END IF;
     
     UPDATE Detail SET Detail.count = detail_count - :NEW.count WHERE id = :new.detail_id;
-END;
+    END;
 
-'''
