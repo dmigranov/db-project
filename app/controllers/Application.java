@@ -251,12 +251,13 @@ public class Application extends Controller {
     {
         Project project = Project.findById(id);
         List details = Detail.findAll();
+        List orders = DetailOrder.find("SELECT o from DetailOrder o where project_id = ?1", id).fetch();
         if(project == null)
             projects(0, 0);
         else {
             String error = orderError;
             orderError = null;
-            render(project, details, error);
+            render(project, details, error, orders);
         }
     }
 
