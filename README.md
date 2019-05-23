@@ -55,7 +55,6 @@ __Мигранов:__
 
 Чтобы добавление заказов на детали работало корректно (т.е. чтобы при добавлении заказа детали изымались со склада и нельзя было добавить несуществующее число деталей) нужно вручную добавить в базу триггер:
 
-    SQL
     CREATE OR REPLACE TRIGGER detail_orders_insert_trigger BEFORE INSERT ON DetailOrder
     FOR EACH ROW
     DECLARE

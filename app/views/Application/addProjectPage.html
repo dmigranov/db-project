@@ -14,6 +14,12 @@
 <body>
 <h1>Project № ${project.id}</h1>
 
+#{if error}
+<div class="alert alert-danger" role="alert">
+${error}
+</div>
+#{/if}
+
 
 <h2>Adding a new order for this project:</h2>
 <form method="post">

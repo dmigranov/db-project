@@ -1,6 +1,7 @@
 package controllers;
 
 import oracle.ons.Cli;
+import org.hibernate.exception.SQLGrammarException;
 import play.*;
 import play.data.validation.Valid;
 import play.db.DB;
@@ -231,7 +232,13 @@ public class Application extends Controller {
             if (!validation.valid(order).ok) {
                 orderError = "Impossible to add such an order!";
             } else {
-                order.save();
+                try {
+                    order.save();
+                }
+                catch(PersistenceException e)        //триггер выкинул исключение!
+                {
+                    orderError = "Impossible to add such an order! Not enough details!";
+                }
             }
         }
         else
@@ -247,7 +254,9 @@ public class Application extends Controller {
         if(project == null)
             projects(0, 0);
         else {
-            render(project, details);
+            String error = orderError;
+            orderError = null;
+            render(project, details, error);
         }
     }
 
