@@ -28,18 +28,9 @@ ${error}
         <select name = 'detail_id' class="form-control" id="exampleFormControlSelect1">
             <option value = selected>---</option>
         #{list items:details, as:'detailIter'}
-            <option value = ${detailIter.id} >${detailIter.type.name} | ${detailIter.name} | ${detailIter.cost}</option>
+            <option value = ${detailIter.id} >${detailIter.type.name} | ${detailIter.name} | ${detailIter.count}</option>
         #{/list}
         </select>
-        <!--
-        <input type="text" class="form-control" id="exampleFormControlInput4" name = 'count' placeholder="Count">
-
-        <select name = 'type' class="form-control" id="exampleFormControlSelect1">
-        #{list items:types, as:'type'}
-            <option value = ${type.id} >${type.name}</option>
-        #{/list}
-        </select>
-        -->
     </div>
     <div class="form-group">
         <div class="col-sm-offset-2 col-sm-10">

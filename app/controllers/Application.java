@@ -242,7 +242,9 @@ public class Application extends Controller {
             }
         }
         else
-            orderError = "Wrong project or detail!";
+            orderError = "Wrong detail!";
+
+        //todo: сумма деталей!
 
         addProjectPage(id);
     }
