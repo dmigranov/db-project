@@ -215,7 +215,7 @@ public class Application extends Controller {
             }
         }
         if(success)
-            Application.addProjectPage(p.id, 0);
+            Application.addProjectPage(p.id);
         else
             Application.projects(0, 0);
     }
@@ -223,7 +223,7 @@ public class Application extends Controller {
     static String orderError = null;
     public static void addOrder(long id, long detail_id , int count)
     {
-        //System.out.println(detail_id);
+        System.out.println(count);
         Project project = Project.findById(id);
         Detail detail = Detail.findById(detail_id);
         if(project != null && detail != null) {
@@ -231,11 +231,13 @@ public class Application extends Controller {
             if (!validation.valid(order).ok) {
                 orderError = "Impossible to add such an order!";
             } else {
-                detail.save();
+                order.save();
             }
         }
+        else
+            orderError = "Wrong project or detail!";
 
-
+        addProjectPage(id);
     }
 
     public static void addProjectPage(long id)

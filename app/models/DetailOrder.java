@@ -17,7 +17,7 @@ public class DetailOrder extends Model {
     public Project project;
     @ManyToOne
     public Detail detail;
-    @Min(0) public int count;   //trigger!
+    @Min(1) public int count;   //trigger!
 
     public DetailOrder(Project project, Detail detail, int count)
     {
