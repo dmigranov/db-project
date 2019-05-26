@@ -62,4 +62,13 @@ public class Project extends Model {
     {
         this.engineer = engineer;
     }
+
+    public void setDetailCost(long cost) {
+        detailCost = cost;
+    }
+
+    public long getDetailCost()
+    {
+        return detailCost;
+    }
 }

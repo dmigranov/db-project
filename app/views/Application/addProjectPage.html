@@ -48,6 +48,9 @@ ${error}
 <h4>Start date: ${project.workBegin}</h4>
 <h4>End date: #{if project.workEnd}${project.workEnd}#{/if} #{else }Not finished#{/else}</h4>
 <h4>Work cost: ${project.workCost}</h4>
+<h4>Details cost: ${project.detailCost}</h4>
+<h4>Total cost: ${project.detailCost + project.workCost}</h4>
+
 <h6>Description:
 #{if project.troubleDescription}
     ${project.troubleDescription}

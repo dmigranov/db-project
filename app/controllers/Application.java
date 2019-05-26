@@ -222,7 +222,7 @@ public class Application extends Controller {
     }
 
     static String orderError = null;
-    public static void addOrder(long id, long detail_id , int count)
+    public static void addOrder(long id, long detail_id, int count) throws SQLException
     {
         System.out.println(count);
         Project project = Project.findById(id);
@@ -234,6 +234,13 @@ public class Application extends Controller {
             } else {
                 try {
                     order.save();
+                    //project.setDetailCost(project.getDetailCost() + count * detail.cost);
+                    long detailAdd = count * detail.cost;
+                    Connection conn = DB.getConnection();
+                    Statement statement = conn.createStatement();
+                    int c = statement.executeUpdate("UPDATE Project SET detailCost = detailCost + " + detailAdd + " WHERE id = " + id);
+                    //todo?
+                    conn.commit();
                 }
                 catch(PersistenceException e)        //триггер выкинул исключение!
                 {
@@ -244,7 +251,6 @@ public class Application extends Controller {
         else
             orderError = "Wrong detail!";
 
-        //todo: сумма деталей!
 
         addProjectPage(id);
     }
