@@ -157,7 +157,6 @@ public class Application extends Controller {
 
     ///выводит список всех проектов и сортирует их
     public static void projects(int sortType, int desc) {   //sortType = 0 - по сумме стимостей, 2 - по типу; desc = 0 - asc, desc = 1 = desc
-        //todo: по идее, стоимость деталей является избыточной, её нужно получать как сумму из DetailOrder'ов!
         List projects = null;
         String order = (desc == 1 ? " desc" : " asc");
         if(sortType == 0) {     //по стоимости
@@ -238,7 +237,7 @@ public class Application extends Controller {
                     Connection conn = DB.getConnection();
                     Statement statement = conn.createStatement();
                     int c = statement.executeUpdate("UPDATE Project SET detailCost = detailCost + " + detailAdd + " WHERE id = " + id);
-                    //todo?
+                    //сделал через Formula
                     conn.commit();*/
                 }
                 catch(PersistenceException e)        //триггер выкинул исключение!

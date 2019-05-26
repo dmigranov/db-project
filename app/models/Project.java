@@ -23,7 +23,9 @@ public class Project extends Model {
     Employee manager;
 
     //@Formula("select sum(o.count * o.detail.count) from DetailOrder o where o.project.id = id")
-    @Formula("select workCost from Project p where p.id = id")
+    //@Formula("select sum(o.count * (select d.count from Detail d where d.id = o.detail_id)) from DetailOrder o where o.project_id = id")
+
+    @Formula("(select COALESCE(sum(o.count * (select d.cost from Detail d where d.id = o.detail_id)), 0) from DetailOrder o where o.project_id = id)")
     @Min(0)long detailCost; //нужно ли хранить? можно же посчитаьт
     @Min(1)int workCost;
 
