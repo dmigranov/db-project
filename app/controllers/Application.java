@@ -476,4 +476,9 @@ public class Application extends Controller {
 
         render(resultList);
     }
+
+    public static void getAssembling()
+    {
+
+    }
 }

@@ -48,9 +48,11 @@ GET      /guaranteed                            Application.findGuaranteedProjec
 
 GET      /clientProjects                        Application.clientProjects
 
+GET      /assembling                            Application.getAssembling
+
 # Ignore favicon requests
 GET     /favicon.ico                            404
-
+#GET     /favicon.ico                            controllers.Assets.at(path:"/public/images", file:"comp.png")
 # Map static resources from the /app/public folder to the /public path
 GET     /public/                                staticDir:public
 
