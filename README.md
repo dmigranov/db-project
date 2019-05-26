@@ -70,3 +70,24 @@ __Мигранов:__
     UPDATE Detail SET Detail.count = detail_count - :NEW.count WHERE id = :new.detail_id;
     END;
 
+И хранимую процедуру:
+
+    create or replace PROCEDURE get_assembling(type IN VARCHAR2, result OUT NUMBER)
+    IS
+
+    wrong_assembling_type EXCEPTION;
+
+    BEGIN
+
+    IF type = 'max' THEN
+    SELECT SUM(a) INTO result FROM (SELECT MAX(cost) AS a FROM Detail GROUP BY type_id);
+    ELSIF type = 'min' THEN
+    SELECT SUM(b) INTO result FROM (SELECT MIN(cost) AS b FROM Detail GROUP BY type_id);
+    ELSE
+    RAISE wrong_assembling_type;
+    END IF;
+
+    END get_assembling;
+
+
+

@@ -9,7 +9,7 @@ import javax.persistence.Entity;
 public class Employee extends Model {
     public String firstName;
     public String lastName;
-    @CheckWith(PositionCheck.class) public String position; //todo
+    @CheckWith(PositionCheck.class) public String position;
     @Phone public String phoneNumber;
     @Email public String email;
     @Min(0) public int salary;
