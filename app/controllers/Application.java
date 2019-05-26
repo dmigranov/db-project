@@ -266,15 +266,24 @@ public class Application extends Controller {
         }
     }
 
-    public static void deleteProject(long id)
+    public static void deleteProject(long id) throws SQLException
     {
         //try{
-            Project.delete("delete from Project where id = ?1", id);
-        /*}
-        catch(PersistenceException e)
-        {
-            //todo
-        }*/
+            Project p = Project.findById(id);
+            if(p == null)
+                return;
+            //p.detailOrders.clear();
+        Connection conn = DB.getConnection();
+
+        Statement statement = conn.createStatement();
+        //int c = statement.exe("UPDATE Project SET manager_id = null WHERE manager_id = " + id);
+
+        PreparedStatement ps = conn.prepareStatement("delete from DetailOrder where project_id = ?");
+        ps.setLong(1, id);
+        ps.executeUpdate();
+        conn.commit();
+
+        Project.delete("delete from Project where id = ?1", id);
 
         projects(0, 0);
     }

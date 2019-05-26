@@ -14,7 +14,8 @@ import javax.validation.constraints.NotNull;
 @Entity
 public class DetailOrder extends Model {
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn
+    @JoinColumn(name = "project_id")
+
     public Project project;
     @ManyToOne
     public Detail detail;

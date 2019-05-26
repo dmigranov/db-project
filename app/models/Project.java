@@ -1,5 +1,6 @@
 package models;
 
+import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.Formula;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
@@ -29,8 +30,10 @@ public class Project extends Model {
     @Min(0)long detailCost; //нужно ли хранить? можно же посчитаьт
     @Min(1)int workCost;
 
-    @OneToMany(cascade = {CascadeType.REMOVE}, mappedBy = "project", orphanRemoval = true)
-    List<DetailOrder> detailOrders = new ArrayList<>();
+    @OneToMany(mappedBy = "project", orphanRemoval = true)
+    @Cascade({org.hibernate.annotations.CascadeType.DELETE})
+
+    public List<DetailOrder> detailOrders = new ArrayList<>();
 
     Date workBegin;
     Date workEnd;
