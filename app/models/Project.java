@@ -1,5 +1,6 @@
 package models;
 
+import org.hibernate.annotations.Formula;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 import play.data.validation.Min;
@@ -21,6 +22,8 @@ public class Project extends Model {
     @ManyToOne @OnDelete(action = OnDeleteAction.CASCADE)
     Employee manager;
 
+    //@Formula("select sum(o.count * o.detail.count) from DetailOrder o where o.project.id = id")
+    @Formula("select workCost from Project p where p.id = id")
     @Min(0)long detailCost; //нужно ли хранить? можно же посчитаьт
     @Min(1)int workCost;
 

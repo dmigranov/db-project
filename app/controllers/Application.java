@@ -224,7 +224,6 @@ public class Application extends Controller {
     static String orderError = null;
     public static void addOrder(long id, long detail_id, int count) throws SQLException
     {
-        System.out.println(count);
         Project project = Project.findById(id);
         Detail detail = Detail.findById(detail_id);
         if(project != null && detail != null) {
@@ -235,12 +234,12 @@ public class Application extends Controller {
                 try {
                     order.save();
                     //project.setDetailCost(project.getDetailCost() + count * detail.cost);
-                    long detailAdd = count * detail.cost;
+                    /*long detailAdd = count * detail.cost;
                     Connection conn = DB.getConnection();
                     Statement statement = conn.createStatement();
                     int c = statement.executeUpdate("UPDATE Project SET detailCost = detailCost + " + detailAdd + " WHERE id = " + id);
                     //todo?
-                    conn.commit();
+                    conn.commit();*/
                 }
                 catch(PersistenceException e)        //триггер выкинул исключение!
                 {
