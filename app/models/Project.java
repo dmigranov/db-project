@@ -29,7 +29,7 @@ public class Project extends Model {
     @Min(0)long detailCost; //нужно ли хранить? можно же посчитаьт
     @Min(1)int workCost;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "project", orphanRemoval = true)
+    @OneToMany(cascade = {CascadeType.REMOVE}, mappedBy = "project", orphanRemoval = true)
     List<DetailOrder> detailOrders = new ArrayList<>();
 
     Date workBegin;

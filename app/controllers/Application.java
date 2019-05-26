@@ -268,13 +268,13 @@ public class Application extends Controller {
 
     public static void deleteProject(long id)
     {
-        try{
+        //try{
             Project.delete("delete from Project where id = ?1", id);
-        }
+        /*}
         catch(PersistenceException e)
         {
             //todo
-        }
+        }*/
 
         projects(0, 0);
     }

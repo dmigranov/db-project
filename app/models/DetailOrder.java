@@ -6,14 +6,15 @@ import play.data.validation.Min;
 import play.db.jpa.Model;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 
 @Entity
 public class DetailOrder extends Model {
-    @ManyToOne
-    @JoinColumn(name = "project_id")
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn
     public Project project;
     @ManyToOne
     public Detail detail;
