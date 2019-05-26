@@ -477,8 +477,13 @@ public class Application extends Controller {
         render(resultList);
     }
 
-    public static void getAssembling()
+    public static void getAssembling() throws SQLException
     {
-
+        Connection conn = DB.getConnection();
+        CallableStatement cs = conn.prepareCall("{CALL get_assembling(?, ?)}");
+        cs.setString(1, "max");
+        cs.registerOutParameter(2, Types.INTEGER);
+        cs.execute();
+        System.out.println(cs.getInt(2));
     }
 }

@@ -48,7 +48,8 @@ GET      /guaranteed                            Application.findGuaranteedProjec
 
 GET      /clientProjects                        Application.clientProjects
 
-GET      /assembling                            Application.getAssembling
+#Самая дорогая и самая дешевая. А в чем смысл, если она просто выдает СТОИМОСТЬ, без самих деталей?
+#GET      /assembling                            Application.getAssembling
 
 # Ignore favicon requests
 GET     /favicon.ico                            404
