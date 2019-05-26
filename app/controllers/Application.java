@@ -29,7 +29,6 @@ public class Application extends Controller {
     public static void salary() {
         List<Employee> employees = Employee.find("order by salary desc").fetch();
 
-        //todo: подавать ещё итоговую зарплату как функцию оклада процента и проектов в которых участвовал
         render(employees);
     }
 
