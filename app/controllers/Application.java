@@ -269,8 +269,8 @@ public class Application extends Controller {
     public static void deleteProject(long id) throws SQLException
     {
         //try{
-            Project p = Project.findById(id);
-            if(p == null)
+        Project p = Project.findById(id);
+        if(p == null)
                 return;
             //p.detailOrders.clear();
         Connection conn = DB.getConnection();

@@ -83,7 +83,7 @@ ${error}
             <option value = selected>---</option>
             #{list items:projects, as:'projectIter'}
                 <option value = ${projectIter[0].id} >
-                #{if projectIter[0].client}Client: ${projectIter[0].client.firstName} ${projectIter[0].client.lastName}#{/if}  #{else }Deleted Client#{/else}; Start: ${projectIter[0].workBegin}; End: ${projectIter[0].workEnd}s
+                ${projectIter[0].id} | #{if projectIter[0].client}Client: ${projectIter[0].client.firstName} ${projectIter[0].client.lastName}#{/if}  #{else }Deleted Client#{/else}; Start: ${projectIter[0].workBegin}; End: ${projectIter[0].workEnd}s
                 </option>
             #{/list}
         </select>
