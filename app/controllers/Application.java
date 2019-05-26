@@ -489,4 +489,9 @@ public class Application extends Controller {
         cs.execute();
         System.out.println(cs.getInt(2));
     }
+
+    public static void popularClients(boolean isPhysical)
+    {
+
+    }
 }
