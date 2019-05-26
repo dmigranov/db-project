@@ -237,8 +237,8 @@ public class Application extends Controller {
                     Connection conn = DB.getConnection();
                     Statement statement = conn.createStatement();
                     int c = statement.executeUpdate("UPDATE Project SET detailCost = detailCost + " + detailAdd + " WHERE id = " + id);
-                    //сделал через Formula
                     conn.commit();*/
+                    //сделал через Formula!
                 }
                 catch(PersistenceException e)        //триггер выкинул исключение!
                 {

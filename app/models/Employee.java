@@ -1,5 +1,6 @@
 package models;
 
+import org.hibernate.annotations.Formula;
 import play.data.validation.*;
 import play.db.jpa.Model;
 
@@ -14,6 +15,8 @@ public class Employee extends Model {
     @Email public String email;
     @Min(0) public int salary;
     @Min(0) @Max(1)public double bonusPercent;
+    @Formula("")
+    public int resultSalary;
 
     public Employee(String firstName, String lastName, String position, String phoneNumber, String email, int salary, double bonusPercent)
     {
