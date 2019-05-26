@@ -15,8 +15,9 @@ public class Employee extends Model {
     @Email public String email;
     @Min(0) public int salary;
     @Min(0) @Max(1)public double bonusPercent;
-    @Formula("")
-    public int resultSalary;
+    //@Formula("(select salary + bonusPercent * SUM(COALESCE(p.workCost, 0)) from Project p JOIN Employee e on p.engineer_id = e.id OR p.manager_id = e.id WHERE e.id = id )")
+    @Formula("(select salary + bonusPercent * COALESCE(SUM(COALESCE(p.workCost, 0)), 0) from Project p WHERE p.engineer_id = id OR p.manager_id = id)")
+    public int resultSalary = 0;
 
     public Employee(String firstName, String lastName, String position, String phoneNumber, String email, int salary, double bonusPercent)
     {
@@ -27,6 +28,7 @@ public class Employee extends Model {
         this.email = email;
         this.salary = salary;
         this.bonusPercent = bonusPercent;
+        this.resultSalary = salary;
     }
 
     private class PositionCheck extends Check {

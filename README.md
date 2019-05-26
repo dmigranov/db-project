@@ -89,5 +89,5 @@ __Мигранов:__
 
     END get_assembling;
 
-
+Аннотация @Formula.
 
