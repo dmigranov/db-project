@@ -499,8 +499,26 @@ public class Application extends Controller {
         System.out.println(cs.getInt(2));
     }
 
-    public static void popularClients(boolean isPhysical)
+    public static void popularClients() throws SQLException
     {
+        Connection conn = DB.getConnection();
+        /*String query = "        SELECT *\n" +
+                "                FROM Client c JOIN\n" +
+                "            (Select c.id as c_id,\n" +
+                "                    count(*) as c_count,\n" +
+                "        from Client c JOIN Project p ON p.client_id = c.id\n" +
+                "          order by c.id" +
+                "        group by c.id)\n" +
+                "        counts ON c.id = counts.c_id;\n";*/
 
+        String query = "SELECT * FROM Client c JOIN (Select c.id as c_id, count(*) as p_count from Client c JOIN Project p ON p.client_id = c.id group by c.id) counts ON c.id = counts.c_id order by p_count";;
+        PreparedStatement statement = conn.prepareStatement(query);
+        ResultSet resultSet = statement.executeQuery();
+        List<Object[]> resultList = new ArrayList<>();
+        while (resultSet.next()) {
+            resultList.add(new Object[]{resultSet.getString("firstName"), resultSet.getString("lastName"),resultSet.getString("phoneNumber"), resultSet.getString("email"), resultSet.getBoolean("isPhysical")});
+        }
+
+        render(resultList);
     }
 }

@@ -48,7 +48,6 @@ GET      /guaranteed                            Application.findGuaranteedProjec
 
 GET      /clientProjects                        Application.clientProjects
 
-#Самая дорогая и самая дешевая. А в чем смысл, если она просто выдает СТОИМОСТЬ, без самих деталей?
 GET      /assembling                            Application.getAssembling
 
 GET      /popularclients                        Application.popularClients

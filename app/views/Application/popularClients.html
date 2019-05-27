@@ -7,57 +7,46 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <title>Popular clients</title>
 </head>
 
 #{extends 'main.html' /}
-#{set title:'Guaranteed projects' /}
+#{set title:'Popular clients' /}
+
 <body>
 <div align="center"><a href =/>Index</a> </div>
 
-<h1>Guaranteed projects</h1>
+<h1>Popular clients</h1>
+</div>
+<div class="details_list">
 
-
-<div class="projects">
     <table class="table">
         <thead>
         <tr>
-            <th scope="col">ID</th>
-            <th scope="col">Detail cost</th>
-            <th scope="col">Work cost</th>
-            <th scope="col">Сost</th>
-            <th scope="col">Start of work</th>
-            <th scope="col">End of work</th>
-            <th scope="col">Trouble description</th>
-            <th scope="col">Type</th>
+            <th scope="col">First name</th>
+            <th scope="col">Last name</th>
+            <th scope="col">Number</th>
+            <th scope="col">E-mail</th>
+            <th scope="col">Is physical</th>
 
         </tr>
         </thead>
         <tbody>
-        #{if projects}
-
-            #{list items:projects, as:'project'}
+        #{if resultList}
+            #{list items:resultList, as:'client'}
             <tr>
-                <td>${project.id}</td>
-                <td>${project.detailCost}</td>
-                <td>${project.workCost}</td>
-                <td>${project.detailCost + project.workCost}</td>
-                <td>${project.workBegin}</td>
-                <td>${project.workEnd}</td>
-                #{if project.troubleDescription == null}
-                    <td>-</td>
+            *{<td>${project.id}</td>}*
+                <td>${client[0]}</td>
+                <td>${client[1]}</td>
+                <td>${client[2]}</td>
+                <td>${client[3]}</td>
+                #{if client[4]}
+                    <td>Physical</td>
                 #{/if}
                 #{else }
-                    <th scope="col">${project.troubleDescription}</th>
+                    <td>Legal</td>
                 #{/else}
-                #{if project.type == false}
-                    <td>Build</td>
-                #{/if}
-                #{else }
-                    <td>Repair</td>
-                #{/else}
-
-
-
             </tr>
             #{/list}
         #{/if}
