@@ -1,4 +1,4 @@
-# Computer firm
+﻿# Computer firm
 Этот репозиторий содержит программу для работы с базой данных компьютерной фирмы.
 ## Необходимые ссылки:
 1. [Тех.задание](https://docs.google.com/document/d/1JG3gvsnaaMV6IHLN1vlIc-pOF0KQGwu5ElBx9AYlxEk/edit#heading=h.hrdrj6drhwfu)
@@ -88,6 +88,10 @@ __Мигранов:__
     END IF;
 
     END get_assembling;
+
+__Болдырев:__
+* Запрос самых популярных клиентов;
+* Хранимая процедура.
 
 Аннотация @Formula.
 
